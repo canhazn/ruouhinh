@@ -38,12 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'rest_framework',
-    'taggit',
-    'taggit_autosuggest',
+    'rest_framework',    
     'django_cleanup.apps.CleanupConfig',
 
     'browser',
+    'product',
     'django_summernote',
 ]
 
