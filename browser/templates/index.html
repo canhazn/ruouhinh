@@ -89,7 +89,7 @@
     </div>
     <!-- slider Area End-->
     <!-- ? New Product Start -->
-    <section class="new-product-area section-padding30">
+    <section id="ruou-trang" class="new-product-area section-padding30">
         <div class="container">
             <!-- Section tittle -->
             <div class="row">
@@ -100,39 +100,19 @@
                 </div>
             </div>
             <div class="row">
+                {% for product in products %}
                 <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
                     <div class="single-new-pro mb-30 text-center">
                         <div class="product-img">
-                            <img src="/browser/static/img/gallery/new_product1.png" alt="">
+                            <img src="/media/{{ product.thumb }}" alt="">
                         </div>
                         <div class="product-caption">
-                            <h3><a href="product_details.html">Rượu trắng 20 lít</a></h3>
-                            <span>600 Ngàn đồng</span>
+                            <h3><a href="{% url 'product-detail' product.slug %}">{{ product.name }}</a></h3>
+                            <span >{{ product.price | stringformat:"d" | slice:":3" }} ngàn đồng</span>
                         </div>
                     </div>
                 </div>
-                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
-                    <div class="single-new-pro mb-30 text-center">
-                        <div class="product-img">
-                            <img src="/browser/static/img/gallery/new_product2.png" alt="">
-                        </div>
-                        <div class="product-caption">
-                            <h3><a href="product_details.html">Rượu trắng 10 lít</a></h3>
-                            <span>300 Ngàn đồng</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
-                    <div class="single-new-pro mb-30 text-center">
-                        <div class="product-img">
-                            <img src="/browser/static/img/gallery/new_product3.png" alt="">
-                        </div>
-                        <div class="product-caption">
-                            <h3><a href="product_details.html">Rượu trắng 5 lít</a></h3>
-                            <span>150 ngàn đồng</span>
-                        </div>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
         </div>
     </section>
@@ -205,7 +185,7 @@
                 <div class="col-lg-5 col-md-6">
                     <div class="watch-details mb-40">
                         <h2>Nồi đồng, gạo tẻ, men bắc</h2>
-                        <p class="mb-0">Rượu trắng được nấu theo phương pháp truyền thống các cụ ngày xưa để lại. </p>
+                        <p class="mb-0">Rượu trắng được nấu theo phương pháp truyền thống ông bà ngày xưa để lại. </p>
                         <p> Là số rượu ít ỏi còn được nấu theo cách thủ công giữa thời đại rượu công nghiệp, công nghệ
                             hóa ngày nay.</p>
                         <a href="shop.html" class="btn">Show Watches</a>

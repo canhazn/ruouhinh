@@ -60,14 +60,14 @@
                     <div class="menu-wrapper">
                         <!-- Logo -->
                         <div class="logo">
-                            <a href="index.html"><img src="{% static 'img/logo/logo.png' %}" alt=""></a>
+                            <a href="{% url 'trang-chu' %}"><img src="{% static 'img/logo/logo.png' %}" alt=""></a>
                         </div>
                         <!-- Main-menu -->
                         <div class="main-menu d-none d-lg-block">
                             <nav>
                                 <ul id="navigation">
                                     <li><a href="">Lí do mua rượu trắng tại Rượu Hinh</a></li>
-                                    <li><a href="">Qui trình nấu rượu</a></li>
+                                    <li><a href="{% url 'qui-trinh-nau-ruou-trang' %}">Qui trình nấu rượu trắng</a></li>
                                     <li><a href="">Liên hệ</a></li>
                                 </ul>
                             </nav>
@@ -80,7 +80,7 @@
                                         <span class="flaticon-search"></span>
                                     </div>
                                 </li>
-                                <li><a href="cart.html"><span class="flaticon-shopping-cart"></span></a> </li>
+                                <li><a href="#ruou-trang"><span class="flaticon-shopping-cart"></span></a> </li>
                             </ul>
                         </div>
                     </div>
