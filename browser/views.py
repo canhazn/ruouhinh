@@ -12,7 +12,7 @@ def homePage(request):
 
 
 def lido(request):
-    return render(request,  "li-do-mua-ruou-trang.html", {
+    return render(request,  "li_do_mua_ruou_trang.html", {
         "app_url": "li-do",
     })
 
