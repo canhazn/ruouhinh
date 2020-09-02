@@ -3,7 +3,7 @@
 
 <!-- Extra head here -->
 {% block extrahead %}
-<title>Rượu Hinh | rượu trắng, men bắc, thơm mùi rượu quê.</title>
+<title>Rượu Hinh | rượu trắng, men bắc | rượu ngon, thơm mùi rượu quê.</title>
 <meta name="description" content="">
 {% endblock extrahead %}
 
@@ -44,7 +44,7 @@
                         </div>
                         <div class="col-xl-3 col-lg-3 col-md-4 col-sm-4 d-none d-sm-block">
                             <div class="hero__img" data-animation="bounceIn" data-delay=".4s">
-                                <img src="/browser/static/img/hero/chum-ruou.png" alt="" class=" heartbeat">
+                                <img loading=lazy src="/browser/static/img/hero/chum-ruou.png" alt="" class=" heartbeat">
                             </div>
                         </div>
                     </div>
@@ -79,7 +79,7 @@
                         </div>
                         <div class="col-xl-3 col-lg-3 col-md-4 col-sm-4 d-none d-sm-block">
                             <div class="hero__img" data-animation="bounceIn" data-delay=".4s">
-                                <img src="/browser/static/img/hero/chum-ruou.png" alt="" class=" heartbeat">
+                                <img loading=lazy src="/browser/static/img/hero/chum-ruou.png" alt="" class=" heartbeat">
                             </div>
                         </div>
                     </div>
@@ -104,7 +104,7 @@
                 <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
                     <div class="single-new-pro mb-30 text-center">
                         <div class="product-img">
-                            <img src="/media/{{ product.thumb }}" alt="">
+                            <img loading=lazy src="/media/{{ product.thumb }}" alt="">
                         </div>
                         <div class="product-caption">
                             <h3><a href="{% url 'product-detail' product.slug %}">{{ product.name }}</a></h3>
@@ -170,7 +170,7 @@
             <!-- Arrow -->
             <div class="thumb-content-box">
                 <div class="thumb-content">
-                    <h3>Next Video</h3>
+                    <h3>Nấu rượu trắng như thế nao?</h3>
                     <a href="#"> <i class="flaticon-arrow"></i></a>
                 </div>
             </div>
@@ -193,14 +193,14 @@
                 </div>
                 <div class="col-lg-6 col-md-6 col-sm-10">
                     <div class="choice-watch-img mb-40">
-                        <img src="/browser/static/img/gallery/choce_watch1.png" alt="">
+                        <img loading=lazy src="/browser/static/img/gallery/choce_watch1.png" alt="">
                     </div>
                 </div>
             </div>
             <div class="row align-items-center justify-content-between">
                 <div class="col-lg-6 col-md-6 col-sm-10">
                     <div class="choice-watch-img mb-40">
-                        <img src="/browser/static/img/gallery/choce_watch2.png" alt="">
+                        <img loading=lazy src="/browser/static/img/gallery/choce_watch2.png" alt="">
                     </div>
                 </div>
                 <div class="col-lg-5 col-md-6">

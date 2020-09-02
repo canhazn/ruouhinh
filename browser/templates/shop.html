@@ -3,7 +3,7 @@
 
 <!-- Extra head here -->
 {% block extrahead %}
-<title>Rượu Hinh | rượu trắng, men bắc, thơm mùi rượu quê.</title>
+<title>Rượu Hinh | rượu trắng, men bắc | rượu ngon, thơm mùi rượu quê.</title>
 <meta name="description" content="">
 <style>
 </style>
@@ -43,7 +43,7 @@
                         <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
                             <div class="single-popular-items mb-50 text-center">
                                 <div class="popular-img">
-                                    <img src="/media/{{ product.thumb }}" alt="">
+                                    <img loading=lazy src="/media/{{ product.thumb }}" alt="">
                                     <a href="{% url 'product-detail' product.slug %}" class="img-cap d-block">
                                         {% if product.available %} <span>Mua rượu</span>
                                         {% else %} <span class="text-warning">Đặt trước</span>

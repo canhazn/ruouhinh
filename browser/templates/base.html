@@ -46,7 +46,7 @@
             <div class="preloader-inner position-relative">
                 <div class="preloader-circle"></div>
                 <div class="preloader-img pere-text">
-                    <img src="{% static 'img/logo/logo.png' %}" alt="">
+                    <img loading=lazy src="{% static 'img/logo/logo.png' %}" alt="">
                 </div>
             </div>
         </div>
@@ -60,7 +60,7 @@
                     <div class="menu-wrapper">
                         <!-- Logo -->
                         <div class="logo">
-                            <a href="{% url 'trang-chu' %}"><img src="{% static 'img/logo/logo.png' %}" alt=""></a>
+                            <a href="{% url 'trang-chu' %}"><img loading=lazy src="{% static 'img/logo/logo.png' %}" alt=""></a>
                         </div>
                         <!-- Main-menu -->
                         <div class="main-menu d-none d-lg-block">
@@ -69,7 +69,7 @@
                                     <li><a href="{% url 'li-do-mua-ruou-trang' %}">Lí do mua rượu trắng tại Rượu
                                             Hinh</a></li>
                                     <li><a href="{% url 'qui-trinh-nau-ruou-trang' %}">Qui trình nấu rượu trắng</a></li>
-                                    <li><a href="{% url 'lien-he' %}">Liên hệ</a></li>
+                                    <li><a href="{% url 'lien-he' %}">Liên hệ</a></li>                                    
                                 </ul>
                             </nav>
                         </div>
@@ -111,7 +111,7 @@
                             <div class="single-footer-caption mb-30">
                                 <!-- logo -->
                                 <div class="footer-logo">
-                                    <a href="{% url 'trang-chu' %}"><img src="{% static 'img/logo/logo2_footer.png' %}"
+                                    <a href="{% url 'trang-chu' %}"><img loading=lazy src="{% static 'img/logo/logo2_footer.png' %}"
                                             alt=""></a>
                                 </div>
                                 <div class="footer-tittle">
