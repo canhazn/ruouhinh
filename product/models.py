@@ -13,6 +13,8 @@ class Product(models.Model):
     content = models.TextField(null=False, blank=False)
     created_on = models.DateTimeField(auto_now_add=True)
     thumb = models.ImageField(upload_to=path_file_name, null=True)
+    available = models.BooleanField(default=True)
+    available_on = models.CharField(max_length=10, null=True, blank=True)
 
     class Meta:
         ordering = ["-created_on"]

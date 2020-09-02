@@ -61,8 +61,16 @@
                                 <p class="m-0 totalcost">{{ product.price | stringformat:"d" | slice:":3" }} ngàn</p>
                             </div>
                             <div class="add_to_cart">
-                                <a id="place-order" href="{% url 'checkout' %}?product={{ product.slug }}&quantity=1" class="btn_3">đặt hàng!</a>
+                                <a id="place-order" href="{% url 'checkout' %}?product={{ product.slug }}&quantity=1"
+                                    class="btn_3">
+                                    {% if product.available %} đặt rượu!
+                                    {% else %} <span>đặt trước!</span>
+                                    {% endif %}
+                                </a>
                             </div>
+                            {% if not product.available %} 
+                            <p>* dự kiến có rượu vào: {{ product.available_on }}</p>                            
+                            {% endif %}
                         </div>
                     </div>
                 </div>
@@ -123,17 +131,17 @@
 </main>
 
 <script>
-    window.onload = function () {        
+    window.onload = function () {
 
         function changeTotalcost(x) {
-            let productPrice = parseInt("{{ product.price }}" + "<br>");            
+            let productPrice = parseInt("{{ product.price }}" + "<br>");
             let total = x * productPrice;
             total = total.toFixed(1).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
             total = total.slice(0, total.length - 2)
             if (total.length > 7) {
                 total = total.slice(0, total.indexOf("0"))
                 if (total.endsWith(",")) total = total.replace(",", " &nbsp")
-                $(".totalcost").html(total + " triệu &nbsp")                
+                $(".totalcost").html(total + " triệu &nbsp")
             } else {
                 total = total.slice(0, total.indexOf(","))
                 $(".totalcost").html(total + " ngàn")

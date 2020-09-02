@@ -19,7 +19,7 @@
         <div class="row">
           <div class="col-xl-12">
             <div class="hero-cap text-center">
-              <h2>Thanh toán</h2>
+              <h2>Đặt rượu</h2>
             </div>
           </div>
         </div>
@@ -32,11 +32,11 @@
       <div class="billing_details">
         <div class="row">
           <div class="col-lg-8">
-            <h3>Thông tin đơn hàng</h3>
+            <h3>Thông tin khách hàng</h3>
             <form id="checkout-form" class="row contact_form" action="" method="post">
               {% csrf_token %}
               <div class="col-md-6 form-group p_star">
-                <input type="text" class="form-control" id="customer" name="customer" required/>
+                <input type="text" class="form-control" id="customer" name="customer" required />
                 <span class="placeholder" data-placeholder="Họ và tên" style="pointer-events: none;"></span>
               </div>
               <div class="col-md-6 form-group p_star">
@@ -49,7 +49,7 @@
               </div>
               <input type="hidden" name="product" value="{{ product.id }}">
               <input type="hidden" name="quantity" value="{{ quantity }}">
-              <input type="hidden" name="submit" value="submit"></input>
+              <input type="hidden" name="submit" value="submit">
               <div class="col-md-12 form-group">
                 <textarea class="form-control" name="note" id="note" rows="1" placeholder="Ghi chú"></textarea>
               </div>
@@ -83,8 +83,14 @@
                   </a>
                 </li>
               </ul>
-              <button id="checkout-btn" type="submit" form="checkout-form" class="btn_3 w-100"
-                style="cursor: pointer;">Đặt hàng!</button>
+              <button id="checkout-btn" type="submit" form="checkout-form" class="btn_3 w-100" style="cursor: pointer;">
+                {% if product.available %} đặt rượu!
+                {% else %} <span>đặt trước!</span>
+                {% endif %}
+              </button>
+              {% if not product.available %}
+              <p>* dự kiến có rượu vào: {{ product.available_on }}</p>
+              {% endif %}
             </div>
           </div>
         </div>
