@@ -68,7 +68,7 @@
                                 <ul id="navigation">
                                     <li><a href="{% url 'li-do-mua-ruou-trang' %}">Lí do mua rượu trắng tại Rượu Hinh</a></li>
                                     <li><a href="{% url 'qui-trinh-nau-ruou-trang' %}">Qui trình nấu rượu trắng</a></li>
-                                    <li><a href="">Liên hệ</a></li>
+                                    <li><a href="{% url 'lien-he' %}">Liên hệ</a></li>
                                 </ul>
                             </nav>
                         </div>
@@ -80,7 +80,7 @@
                                         <span class="flaticon-search"></span>
                                     </div>
                                 </li> -->
-                                <li><a href="#ruou-trang"><span class="flaticon-shopping-cart"></span></a> </li>
+                                <li><a href="{% url 'cua-hang' %}"><span class="flaticon-shopping-cart"></span></a> </li>
                             </ul>
                         </div>
                     </div>
@@ -109,7 +109,7 @@
                             <div class="single-footer-caption mb-30">
                                 <!-- logo -->
                                 <div class="footer-logo">
-                                    <a href="index.html"><img src="{% static 'img/logo/logo2_footer.png' %}" alt=""></a>
+                                    <a href="{% url 'trang-chu' %}"><img src="{% static 'img/logo/logo2_footer.png' %}" alt=""></a>
                                 </div>
                                 <div class="footer-tittle">
                                     <div class="footer-pera">

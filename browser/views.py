@@ -21,3 +21,19 @@ def quitrinh(request):
     return render(request,  "qui_trinh_nau_ruou_trang.html", {
         "app_url": "qui-trinh",
     })
+
+
+def shop(request):
+    queryset = models.Product.objects.all()
+
+    return render(request,  "shop.html", {
+        "app_url": "cua-hang",
+        "products": queryset
+    })
+
+
+def contact(request):
+
+    return render(request,  "contact.html", {
+        "app_url": "lien-he",
+    })
