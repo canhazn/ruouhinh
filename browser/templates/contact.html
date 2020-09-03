@@ -3,9 +3,18 @@
 
 <!-- Extra head here -->
 {% block extrahead %}
-<title>Rượu Hinh | rượu trắng, men bắc | rượu ngon, thơm mùi rượu quê.</title>
+<title>Rượu Hinh | rượu trắng, men bắc, thơm mùi rượu quê.</title>
 <meta name="description" content="">
 <style>
+    #map {
+        height: 480px;
+    }
+
+    @media (max-width: 576px) {
+        #map {
+            height: 280px;
+        }
+    }
 </style>
 {% endblock extrahead %}
 
@@ -32,12 +41,12 @@
     <!-- ================ contact section start ================= -->
     <section class="contact-section">
         <div class="container">
-            <div class="d-none d-sm-block mb-5 pb-4">
-                <div id="map" style="height: 480px; width:100%; position: relative; overflow: hidden;">
+            <div class="d-sm-block mb-5 pb-4">
+                <div id="map" style="width:100%; position: relative; overflow: hidden;">
                     <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3713.5415679784396!2d105.54021981430513!3d21.44725687873682!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3134e903edc2faad%3A0xc1bfd8d4cc65c761!2zbmjDoCBIaW5oIE3hur9u!5e0!3m2!1sen!2s!4v1598947952283!5m2!1sen!2s"
-                        width="100%" height="480" frameborder="0" style="border:0;" allowfullscreen=""
-                        aria-hidden="false" tabindex="0" crossorigin="anonymous"></iframe>
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3713.5415679784314!2d105.54021981430513!3d21.44725687873682!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3134e903edc2faad%3A0xc1bfd8d4cc65c761!2zbmjDoCBIaW5oIE3hur9u!5e0!3m2!1sen!2s!4v1599114801124!5m2!1sen!2s"
+                        width="100%" height="100%" frameborder="0" style="border:0;" allowfullscreen=""
+                        aria-hidden="false" tabindex="0"></iframe>
                 </div>
 
                 {% comment %} <script>
