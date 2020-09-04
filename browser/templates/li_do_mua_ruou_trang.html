@@ -3,9 +3,17 @@
 
 <!-- Extra head here -->
 {% block extrahead %}
-<title>Rượu Hinh | rượu trắng, men bắc | rượu ngon, thơm mùi rượu quê.</title>
+<title>Rượu trắng (men bắc) ngon, thơm lừng - Cửa hàng Rượu Hinh</title>
 <meta name="description" content="">
 <style>
+    .faq-title {
+        background-color: #ea0000;
+        color: white;
+    }
+
+    .card {
+        border-color: white;
+    }
 </style>
 {% endblock extrahead %}
 
@@ -21,9 +29,9 @@
                 <div class="row">
                     <div class="col-xl-12">
                         <div class="hero-cap text-center">
-                        <div class="col-lg-9 m-auto">
-                            <h2>Lí do mua rượu trắng tại Rượu Hinh</h2>
-                        </div>
+                            <div class="col-lg-9 m-auto">
+                                <h2>Lí do mua rượu trắng tại Rượu Hinh</h2>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -82,12 +90,72 @@
                     </ul>
                 </div>
             </div>
-            <div class="mt-30">
-                <h4 class="mb-20">3, Rượu trắng ngon vì được ủ trong chum sành:</h4>
-                <div class="">
-                    <p>Rượu được cất trong chum hạ thổ từ 3 tháng cho tới 1 năm, hơn 1 năm. Vì vậy rượu trắng rất thơm.
-                        Mùi thơm rất đặc trưng không lẫn vào đâu được, cũng bởi nhờ nguồn nước Tam Đảo - vùng núi đá vôi
-                        nên nước sạch và ngon tự nhiên.</p>
+        </div>
+    </section>
+
+    <section>
+        <div class="accordion col-md-8 m-auto faq" id="accordionExample">
+            <div class="card">
+                <div class="card-header p-0" id="headingOne">
+                    <h2 class="mb-0">
+                        <div class="text-left faq-title p-3" data-toggle="collapse" data-target="#collapseOne"
+                            aria-expanded="true" aria-controls="collapseOne">
+                            <h4 class="text-white"> Rượu Hinh khác gì rượu trên thị trường? </h4>
+                        </div>
+                    </h2>
+                </div>
+
+                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+                    data-parent="#accordionExample">
+                    <div class="card-body">
+                        <p>Rượu không có gì nổi bật thì làm sao cạnh tranh được với thị trường? Rượu Hinh đúng là không
+                            có gì gọi là điểm nổi trội khác biệt hoàn toàn. Rượu Hinh chỉ là thứ rượu rất bình dị gần
+                            gũi với đời sống miền quê đơn giải. Đặc điểm để cạnh tranh thị trường không cao, chỉ mong
+                            đóng góp một hương vị đầy dản dị đến thị trường rượu trắng hiện nay.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header p-0" id="headingTwo">
+                    <h2 class="mb-0">
+                        <div class="text-left faq-title p-3 collapsed" data-toggle="collapse" data-target="#collapseTwo"
+                            aria-expanded="false" aria-controls="collapseTwo">
+                            <h4 class="text-white">Giá Rượu Hinh có đắt không?</h4>
+                        </div>
+                    </h2>
+                </div>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <p>
+                            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad
+                            squid.
+                            3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt
+                            laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin
+                            coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes
+                            anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings
+                            occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't
+                            heard
+                            of them accusamus labore sustainable VHS.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header p-0" id="headingThree">
+                    <h2 class="mb-0">
+                        <div class="text-left faq-title p-3 collapsed" data-toggle="collapse"
+                            data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            <h4 class="text-white">Rượu Hinh có phải rượu rởm không?</h4>
+                        </div>
+                    </h2>
+                </div>
+                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <p>Luôn mong làm rượu tốt để bán: phải làm rượu tốt thì mới bán được giá cao và được bà con ủng
+                            hộ. Không hề có chuyện làm rượu rởm để ăn lời. Luôn cố gắng để đảm bảo chất lượng rượu tốt
+                            hơn, nhưng khó tránh khỏi sai sót khi nấu số lượng rượu lớn, bất kì khách hàng nào gặp vấn
+                            đề về chất lượng rượu tại rượu Hinh xin <a href="{% url 'lien-he' %}" class="text-info">liên hệ</a> hotline để được hỗ trợ.</p>
+                    </div>
                 </div>
             </div>
         </div>

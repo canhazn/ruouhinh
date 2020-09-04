@@ -3,7 +3,7 @@ from product import views
 
 
 urlpatterns = [
-    path('san-pham/<slug:slug>/',
+    path('cua-hang/<slug:slug>/',
          views.ProductDetailView.as_view(), name="product-detail"),
     path('thanh-toan/', views.checkout, name="checkout"),
     path('thanh-toan-thanh-cong/', views.confirmation,

@@ -60,7 +60,8 @@
                     <div class="menu-wrapper">
                         <!-- Logo -->
                         <div class="logo">
-                            <a href="{% url 'trang-chu' %}"><img loading=lazy src="{% static 'img/logo/logo.png' %}" alt=""></a>
+                            <a href="{% url 'trang-chu' %}"><img loading=lazy src="{% static 'img/logo/logo.png' %}"
+                                    alt=""></a>
                         </div>
                         <!-- Main-menu -->
                         <div class="main-menu d-none d-lg-block">
@@ -69,7 +70,7 @@
                                     <li><a href="{% url 'li-do-mua-ruou-trang' %}">Lí do mua rượu trắng tại Rượu
                                             Hinh</a></li>
                                     <li><a href="{% url 'qui-trinh-nau-ruou-trang' %}">Qui trình nấu rượu trắng</a></li>
-                                    <li><a href="{% url 'lien-he' %}">Liên hệ</a></li>                                    
+                                    <li><a href="{% url 'lien-he' %}">Liên hệ</a></li>
                                 </ul>
                             </nav>
                         </div>
@@ -111,8 +112,8 @@
                             <div class="single-footer-caption mb-30">
                                 <!-- logo -->
                                 <div class="footer-logo">
-                                    <a href="{% url 'trang-chu' %}"><img loading=lazy src="{% static 'img/logo/logo2_footer.png' %}"
-                                            alt=""></a>
+                                    <a href="{% url 'trang-chu' %}"><img loading=lazy
+                                            src="{% static 'img/logo/logo2_footer.png' %}" alt=""></a>
                                 </div>
                                 <div class="footer-tittle">
                                     <div class="footer-pera">
@@ -131,10 +132,11 @@
                             <div class="footer-tittle">
                                 <h4>Quick Links</h4>
                                 <ul>
-                                    <li><a href="#">About</a></li>
-                                    <li><a href="#"> Offers & Discounts</a></li>
-                                    <li><a href="#"> Get Coupon</a></li>
-                                    <li><a href="#"> Contact Us</a></li>
+                                    <li><a href="{% url 'trang-chu' %}">Giới thiệu</a></li>
+                                    <li><a href="{% url 'cua-hang' %}">Cửa hàng rượu trắng online</a></li>
+                                    <li><a href="{% url 'qui-trinh-nau-ruou-trang' %}">Qui trình nấu rượu trắng</a></li>
+                                    <li><a href="{% url 'li-do-mua-ruou-trang' %}">Lí do mua rượu trắng tại Rượu
+                                            Hinh</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -142,12 +144,11 @@
                     <div class="col-xl-3 col-lg-3 col-md-4 col-sm-7">
                         <div class="single-footer-caption mb-50">
                             <div class="footer-tittle">
-                                <h4>New Products</h4>
+                                <h4>Rượu trắng ngon</h4>
                                 <ul>
-                                    <li><a href="#">Woman Cloth</a></li>
-                                    <li><a href="#">Fashion Accessories</a></li>
-                                    <li><a href="#"> Man Accessories</a></li>
-                                    <li><a href="#"> Rubber made Toys</a></li>
+                                    <li><a href="/cua-hang/ruou-trang-20-lit">Rượu trắng 20 lít</a></li>
+                                    <li><a href="/cua-hang/ruou-trang-10-lit">Rượu trắng 10 lít</a></li>
+                                    <li><a href="/cua-hang/ruou-trang-5-lit">Rượu trắng 5 lít</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -155,12 +156,12 @@
                     <div class="col-xl-3 col-lg-3 col-md-5 col-sm-7">
                         <div class="single-footer-caption mb-50">
                             <div class="footer-tittle">
-                                <h4>Support</h4>
+                                <h4>Hỗ trợ</h4>
                                 <ul>
-                                    <li><a href="#">Frequently Asked Questions</a></li>
-                                    <li><a href="#">Terms & Conditions</a></li>
-                                    <li><a href="#">Privacy Policy</a></li>
-                                    <li><a href="#">Report a Payment Issue</a></li>
+                                    <li><a href="{% url 'lien-he' %}">Liên hệ</a></li>
+                                    <li><a href="{% url 'lien-he' %}">Hỗ trợ đặt rượu</a></li>
+                                    <li><a href="{% url 'lien-he' %}">Phản ánh chất lượng</a></li>
+                                    <li><a>Hotline: </a><a href="tel:035107402"> 0353 107 402</a></li>
                                 </ul>
                             </div>
                         </div>
