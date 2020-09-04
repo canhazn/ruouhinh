@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import generic
 from product import models, forms
+from django.core.mail import send_mail
 
 
 class ProductDetailView(generic.DetailView):
@@ -16,12 +17,23 @@ def checkout(request):
     product = get_object_or_404(models.Product, slug=slug)
 
     if request.method == "POST":
-        print(request.body)
         form = forms.OrderForm(request.POST)
-        print(form.is_valid())
         if form.is_valid():
-            form.save()
-            return redirect("thanh-toan-thanh-cong")
+            instance = form.save()
+            message = "%s - %s - %s - %s - %s" % (instance.customer,
+                                                  instance.address,
+                                                  instance.phone,
+                                                  instance.quantity,
+                                                  product.name)
+            send_mail(subject="Money coming babe :)", message=message,
+                      from_email='ruouhinh@gmail.com',
+                      recipient_list=["canhazn@gmail.com"],
+                      fail_silently=False)
+            # print(instance)
+            return redirect("thanh-toan-thanh-cong", instance.id)
+
+    else:
+        print("fomr invalid")
 
     context = {
         "product": product,
@@ -31,5 +43,15 @@ def checkout(request):
     return render(request, "checkout.html", context)
 
 
-def confirmation(request):
-    return render(request, "confirmation.html")
+def confirmation(request, pk):
+
+    order = get_object_or_404(models.Order, id=pk)
+    product = get_object_or_404(models.Product, id=order.product.id)
+    print(product)
+
+    context = {
+        "order": order,
+        "product": product
+    }
+
+    return render(request, "confirmation.html", context)

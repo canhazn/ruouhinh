@@ -11,6 +11,11 @@
 
 <!-- Content here -->
 {% block content %}
+<style>
+  .confirmation_part .single_confirmation_details ul li {
+    padding-left: 40% !important;
+  }
+</style>
 <main>
   <!-- Hero Area Start-->
   <div class="slider-area ">
@@ -19,7 +24,7 @@
         <div class="row">
           <div class="col-xl-12">
             <div class="hero-cap text-center">
-              <h2>Đã xác nhận</h2>
+              <h2>Cảm ơn quý khách</h2>
             </div>
           </div>
         </div>
@@ -32,12 +37,96 @@
       <div class="row">
         <div class="col-lg-12">
           <div class="confirmation_tittle">
-            <span>Cảm ơn. Đơn hàng của bạn đã được nhận.</span>
+            <span>Đơn đặt rượu của quí khách đã được nhận.</span>
           </div>
-        </div>           
+        </div>
+        <div class="col-lg-6 col-lx-4">
+          <div class="single_confirmation_details p-3">
+            <h4>Thông tin đặt hàng</h4>
+            <ul>
+              <li>
+                <p>Mã đơn hàng</p><span>: {{ order.id }}</span>
+              </li>
+              <li>
+                <p>Ngày tạo</p><span>: {{ order.created_on | date:"H:i d/m/Y" }}</span>
+              </li>
+              <li>
+                <p>Giá trị</p><span>:</span> <span id="cost">: </span>
+              </li>
+              <li>
+                <p>Thanh toán</p><span>: Giao hàng (COD)</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-lg-6 col-lx-4">
+          <div class="single_confirmation_details p-3">
+            <h4>Địa chỉ giao hàng</h4>
+            <ul>
+              <li>
+                <p>Địa chỉ</p><span>: {{ order.address }} </span>
+              </li>
+              <li>
+                <p>Người nhận</p><span>: {{ order.customer }} </span>
+              </li>
+              <li>
+                <p>Số điện thoại</p><span>: {{ order.phone }} </span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="order_details_iner p-3">
+            <h3>Thông tin đơn hàng</h3>
+            <table class="table table-borderless">
+              <thead>
+                <tr>
+                  <th class="pl-0" scope="col" colspan="2">Sản phẩm</th>
+                  <th class="" scope="col">Số lượng</th>
+                  <th class="pr-0" scope="col">Tổng số</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th class="pl-0" colspan="2"><span>{{ product.name }}</span></th>
+                  <th>x{{ order.quantity }}</th>
+                  <th class="pr-0"> <span id="totalcost"></span></th>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <div class="row mt-3">
+        <div class="col-lg-12">
+          <p>*Liên hệ hotline để được hỗ trợ về thông tin đơn hàng</p>
+        </div>
       </div>
     </div>
   </section>
   <!--================ confirmation part end =================-->
 </main>
+
+<script>
+  window.onload = function () {
+
+    (function () {
+      // change total cost
+      let productPrice = parseInt("{{ product.price }}" + "<br>");
+      let quantity = parseInt("{{ order.quantity }}" + "<br>");
+
+      let total = productPrice * quantity;
+      total = total.toFixed(1).replace(/(\d)(?=(\d{3})+\.)/g, '$1,');
+      total = total.slice(0, total.length - 2) + " đ"
+      console.log(total)
+      $("#cost").html(total)
+      $("#totalcost").html(total)
+    })();
+  }
+</script>
 {% endblock content %}
