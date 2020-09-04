@@ -7,7 +7,13 @@
     <meta charset="utf-8">
     <base href="/">
     <meta name="google" content="notranslate" />
+    <link rel="canonical" href="{{ request.build_absolute_uri  }}" />
+    <meta name="robots" content="all" />
+    <meta name="revisit-after" content="1 days" />
+    <meta http-equiv="content-language" content="vi" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
 
     <!-- CSS here -->
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
@@ -27,6 +33,7 @@
         href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
         rel="stylesheet">
 
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZQ2KN677F"></script>
 
     <!-- For extend header -->
     {% block extrahead %}{% endblock extrahead %}
@@ -37,7 +44,13 @@
     <!-- define global variable on to of body -->
     <script language="javascript">
         var STATIC_URL = "{% static ''%}";
-        console.log(STATIC_URL);
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'G-NZQ2KN677F');
     </script>
 
 
