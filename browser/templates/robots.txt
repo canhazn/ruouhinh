@@ -1,0 +1,7 @@
+# Group 1
+User-agent: Googlebot
+Allow: /
+Disallow: /admin
+
+
+Sitemap: https://www.ruouhinh.com/sitemap.xml
