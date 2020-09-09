@@ -3,8 +3,26 @@
 
 <!-- Extra head here -->
 {% block extrahead %}
-<title>Rượu trắng (men bắc) ngon, thơm lừng - Cửa hàng Rượu Hinh</title>
+<title>Mua {{ product.name | lower }} - Rượu êm, uống không sợ đau đầu.</title>
 <meta name="description" content="">
+<style>
+    .h2 {
+        font-family: "Josefin Sans", sans-serif !important;
+        color: #0b1c39 !important;
+        margin-top: 0px !important;
+        font-style: normal !important;
+        font-size: 70px !important;
+        font-weight: 700 !important;
+        text-transform: capitalize !important;
+    }
+
+
+    @media (max-width: 576px) {
+        .h2 {
+            font-size: 28px !important;
+        }
+    }
+</style>
 {% endblock extrahead %}
 
 
@@ -19,7 +37,7 @@
                 <div class="row">
                     <div class="col-xl-12">
                         <div class="hero-cap text-center">
-                            <h2>Cửa hàng rượu Hinh</h2>
+                            <h1 class="h2">Mua {{ product.name | lower }}</h1>
                         </div>
                     </div>
                 </div>
@@ -42,12 +60,7 @@
                     <div class="single_product_text text-center">
                         <h3>{{ product.name }}</h3>
                         <p>
-                            Seamlessly empower fully researched growth strategies and interoperable internal or
-                            “organic” sources. Credibly innovate granular internal or “organic” sources whereas high
-                            standards in web-readiness. Credibly innovate granular internal or organic sources whereas
-                            high standards in web-readiness. Energistically scale future-proof core competencies
-                            vis-a-vis impactful experiences. Dramatically synthesize integrated schemas. with optimal
-                            networks.
+                            {{ product.content }}
                         </p>
                         <div class="card_area">
                             <div class="product_count_area">
@@ -68,8 +81,8 @@
                                     {% endif %}
                                 </a>
                             </div>
-                            {% if not product.available %} 
-                            <p>* dự kiến có rượu vào: {{ product.available_on }}</p>                            
+                            {% if not product.available %}
+                            <p>* dự kiến có rượu vào: {{ product.available_on }}</p>
                             {% endif %}
                         </div>
                     </div>

@@ -3,16 +3,31 @@
 
 <!-- Extra head here -->
 {% block extrahead %}
-<title>Rượu Hinh | rượu trắng, men bắc, thơm mùi rượu quê.</title>
-<meta name="description" content="">
+<title>Liên hệ - đặt câu hỏi, chỉ đường, hotline...</title>
+<meta name="description" content="Đặt câu hỏi, tìm đường Google map, hotline Rượu Hinh">
 <style>
     #map {
         height: 480px;
     }
 
+    .h2 {
+        font-family: "Josefin Sans", sans-serif !important;
+        color: #0b1c39 !important;
+        margin-top: 0px !important;
+        font-style: normal !important;
+        font-size: 70px !important;
+        font-weight: 700 !important;
+        text-transform: capitalize !important;
+    }
+
+
     @media (max-width: 576px) {
         #map {
             height: 280px;
+        }
+
+        .h2 {
+            font-size: 28px !important;
         }
     }
 </style>
@@ -30,7 +45,7 @@
                 <div class="row">
                     <div class="col-xl-12">
                         <div class="hero-cap text-center">
-                            <h2>Liên hệ</h2>
+                            <h1 class="h2">Liên hệ</h1>
                         </div>
                     </div>
                 </div>
@@ -51,7 +66,7 @@
             </div>
             <div class="row">
                 <div class="col-12">
-                    <h2  class="contact-title">Gửi câu hỏi</h2>
+                    <h2 class="contact-title">Gửi câu hỏi</h2>
                 </div>
                 <div class="col-lg-8">
                     <form class="form-contact contact_form" action="contact_process.php" method="post" id="contactForm"
