@@ -44,8 +44,8 @@
                     <div class="row justify-content-between align-items-center">
                         <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8">
                             <div class="hero__caption">
-                                <h1 data-animation="fadeInLeft" data-delay=".4s" data-duration="2000ms">Mua rượu trắng
-                                    ngon</h1>
+                                <h1 data-animation="fadeInLeft" data-delay=".4s" data-duration="2000ms">Mùi rượu của
+                                    Hinh</h1>
                                 <div class="poem" data-animation="fadeInLeft" data-delay=".7s" data-duration="2000ms">
                                     <p class="m-0">Nghe tin Hinh nấu rượu chi,</p>
                                     <p class="m-0">Ngô hay nếp tẻ, rượu gì thơm thơm!</p>
@@ -130,7 +130,7 @@
                 <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
                     <div class="single-new-pro mb-30 text-center">
                         <div class="product-img">
-                            <img loading=lazy src="/media/{{ product.thumb }}" alt="">
+                            <img loading=lazy src="/media/{{ product.thumb }}" alt="{{ product.name }}">
                         </div>
                         <div class="product-caption">
                             <h3><a href="{% url 'product-detail' product.slug %}">{{ product.name }}</a></h3>

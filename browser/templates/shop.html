@@ -3,7 +3,7 @@
 
 <!-- Extra head here -->
 {% block extrahead %}
-<title>Mua rượu trắng ngon tại Rượu Hinh - Cửa hàng Rượu Hinh</title>
+<title>Mua rượu trắng ngon tại cửa hàng Rượu Hinh</title>
 <meta name="description"
     content="Rượu Hinh là địa chỉ uy tín để mua rượu trắng. Các sản phẩm: rượu trắng 20 lít, rượu trắng 10 lít, rượu trắng 5 lít. Ưu tiên rượu được đặt trước.">
 <style>
@@ -38,7 +38,7 @@
                 <div class="row">
                     <div class="col-xl-12">
                         <div class="hero-cap text-center">
-                            <h1 class="h2">Mua rượu trắng ngon tại Rượu Hinh</h1>
+                            <h1 class="h2">Mua rượu trắng ngon tại cửa hàng Rượu Hinh</h1>
                         </div>
                     </div>
                 </div>
@@ -60,7 +60,7 @@
                         <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6">
                             <div class="single-popular-items mb-50 text-center">
                                 <div class="popular-img">
-                                    <img loading=lazy src="/media/{{ product.thumb }}" alt="">
+                                    <img loading=lazy src="/media/{{ product.thumb }}" alt="{{ product.name }}">
                                     <a href="{% url 'product-detail' product.slug %}" class="img-cap d-block">
                                         {% if product.available %} <span>Mua rượu</span>
                                         {% else %} <span class="text-warning">Đặt trước</span>
