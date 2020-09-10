@@ -4,7 +4,8 @@
 <!-- Extra head here -->
 {% block extrahead %}
 <title>{{ product.name }} - Rượu êm, uống không sợ đau đầu.</title>
-<meta name="description" content="Mua rượu trắng ngon - rượu 28 độ nấu bằng phương pháp thủ công từ gạo tẻ và men bắc. Rượu uống êm, không sợ đau đầu.">
+<meta name="description"
+    content="Mua rượu trắng ngon - rượu 28 độ nấu bằng phương pháp thủ công từ gạo tẻ và men bắc. Rượu uống êm, không sợ đau đầu.">
 <style>
     .h2 {
         font-family: "Josefin Sans", sans-serif !important;
@@ -33,16 +34,20 @@
     {
         "@context": "https://schema.org/",
         "@type": "Product",
-        "name": "{{ prodict.name }}",
+        "name": "{{ product.name }}",
         "image": [
-            "{{ request.get_host }}/media/{{ product.thumb }}",
-        ],        
+            "{{ request.get_host }}/media/{{ product.thumb }}"
+        ],
         "offers": {
             "@type": "Offer",
             "url": "https://example.com/anvil",
             "priceCurrency": "VND",
-            "price": {{ product.price }},
-            "availability": "https://schema.org/InStock",            
+            "price": {
+                {
+                    product.price
+                }
+            },
+            "availability": "https://schema.org/InStock"
         }
     }
 </script>
@@ -76,7 +81,8 @@
                 <div class="col-lg-12">
                     <div class="product_img_slide owl-carousel">
                         <div class="single_product_img">
-                            <img loading=lazy src="/media/{{ product.thumb }}" alt="{{ product.name }}" class="img-fluid">
+                            <img loading=lazy src="/media/{{ product.thumb }}" alt="{{ product.name }}"
+                                class="img-fluid">
                         </div>
                     </div>
                 </div>
@@ -84,7 +90,9 @@
                     <div class="single_product_text text-center">
                         {% comment %} <h3>{{ product.name }}</h3> {% endcomment %}
                         <p>
-                            Được nấu theo phương pháp thủ công từ gạo tẻ và men bắc. Rượu uống rất êm, nó sẽ đem lại những phút giây hứng khởi trên bàn rượu của quý khách. Rượu uống say song là say, không bao giờ sợ đâu đầu. Nồng độ: 28 độ (liên hệ hotline để đặt rượu nồng độ cao hơn).
+                            Được nấu theo phương pháp thủ công từ gạo tẻ và men bắc. Rượu uống rất êm, nó sẽ đem lại
+                            những phút giây hứng khởi trên bàn rượu của quý khách. Rượu uống say song là say, không bao
+                            giờ sợ đâu đầu. Nồng độ: 28 độ (liên hệ hotline để đặt rượu nồng độ cao hơn).
                         </p>
                         <div class="card_area">
                             <div class="product_count_area">
