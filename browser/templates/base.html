@@ -33,8 +33,6 @@
         href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i"
         rel="stylesheet">
 
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-NZQ2KN677F"></script>
-
     <script type="application/ld+json">
         {
             "@context": "https://schema.org/",
@@ -70,16 +68,7 @@
     <!-- define global variable on to of body -->
     <script language="javascript">
         var STATIC_URL = "{% static ''%}";
-        window.dataLayer = window.dataLayer || [];
-
-        function gtag() {
-            dataLayer.push(arguments);
-        }
-        gtag('js', new Date());
-
-        gtag('config', 'G-NZQ2KN677F');
     </script>
-
 
     <div id="preloader-active">
         <div class="preloader d-flex align-items-center justify-content-center">
@@ -287,6 +276,21 @@
     <!-- Jquery Plugins, main Jquery -->
     <script src="{% static 'js/plugins.js' %}"></script>
     <script src="{% static 'js/main.js' %}"></script>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-128995452-6">
+    </script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-128995452-6');
+    </script>
+
 </body>
 
 </html>
