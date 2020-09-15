@@ -67,17 +67,17 @@
     <script language="javascript">
         var STATIC_URL = "{% static ''%}";
     </script>
-{% comment %} 
+
     <div id="preloader-active">
         <div class="preloader d-flex align-items-center justify-content-center">
             <div class="preloader-inner position-relative">
                 <div class="preloader-circle"></div>
                 <div class="preloader-img pere-text">
-                    <img loading=lazy src="{% static 'img/logo/logo.png' %}" alt="">
+                    <img loading=lazy src="{% static 'img/logo/logo.png' %}" alt="Logo">
                 </div>
             </div>
         </div>
-    </div> {% endcomment %}
+    </div>
     <!-- Preloader Start -->
     <header>
         <!-- Header Start -->
@@ -88,7 +88,7 @@
                         <!-- Logo -->
                         <div class="logo">
                             <a href="{% url 'trang-chu' %}"><img loading=lazy src="{% static 'img/logo/logo.png' %}"
-                                    alt=""></a>
+                                    alt="Logo"></a>
                         </div>
                         <!-- Main-menu -->
                         <div class="main-menu d-none d-lg-block">
@@ -140,7 +140,7 @@
                                 <!-- logo -->
                                 <div class="footer-logo">
                                     <a href="{% url 'trang-chu' %}"><img loading=lazy
-                                            src="{% static 'img/logo/logo2_footer.png' %}" alt=""></a>
+                                            src="{% static 'img/logo/logo2_footer.png' %}" alt="Logo"></a>
                                 </div>
                                 <div class="footer-tittle">
                                     <div class="footer-pera">
