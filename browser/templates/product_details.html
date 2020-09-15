@@ -17,6 +17,12 @@
         text-transform: capitalize !important;
     }
 
+    .input-number {
+        background-color: #828bb2;
+        height: 50px;
+        line-height: 50px;
+    }
+
 
     @media (max-width: 576px) {
         .h2 {
@@ -114,14 +120,23 @@
                         <div class="card_area">
                             <div class="product_count_area">
                                 <p class="m-0">Số lượng:</p>
-                                <div class="product_count d-inline-block">
-                                    <span class="product_count_item inumber-decrement"> <i class="ti-minus"></i></span>
-                                    <input id="quantity" class="product_count_item input-number" type="text" value="1"
-                                        min="1" max="10">
-                                    <span class="product_count_item number-increment"> <i class="ti-plus"></i></span>
+                                <div class="product_count d-flex align-items-center">
+                                    <div class="product_count_item inumber-decrement">-</div>
+                                    <div class="input-number px-3 align-self-stretch text-white">5</div>
+                                    <div class="product_count_item number-increment"> +</div>
                                 </div>
                                 <p class="m-0 totalcost">{{ product.price | stringformat:"d" | slice:":3" }} ngàn</p>
                             </div>
+                            {% comment %} <div class="product_count_area">
+                                <p class="m-0">Số lượng:</p>
+                                <div class="product_count d-inline-block">
+                                    <span class="product_count_item inumber-decrement">-</span>
+                                    <input id="quantity" class="product_count_item input-number" type="text" value="1"
+                                        min="1" max="10">
+                                    <span class="product_count_item number-increment"> +</span>
+                                </div>
+                                <p class="m-0 totalcost">{{ product.price | stringformat:"d" | slice:":3" }} ngàn</p>
+                            </div> {% endcomment %}
                             <div class="add_to_cart">
                                 <a id="place-order" href="{% url 'checkout' %}?product={{ product.slug }}&quantity=1"
                                     class="btn_3">
@@ -139,39 +154,7 @@
             </div>
         </div>
     </div>
-    <!--================End Single Product Area =================-->
 
-    {% comment %}
-    <div class="checkout_area">
-        <div class="container">
-            <h3 class="text-center" style="font-size: 25px;">Tiến hành đặt hàng:</h3>
-            <form class="row flex-column justify-content-center align-items-center" action="#" method="post"
-                novalidate="novalidate">
-                <div class="col-md-6 form-group p_star">
-                    <input type="text" class="form-control" id="first" name="name" />
-                    <span class="placeholder" data-placeholder="Họ và tên"></span>
-                </div>
-                <div class="col-md-6 form-group p_star">
-                    <input type="text" class="form-control" id="number" name="number" />
-                    <span class="placeholder" data-placeholder="Số điện thoại"></span>
-                </div>
-                <div class="col-md-6 form-group p_star">
-                    <input type="text" class="form-control" id="number" name="address" />
-                    <span class="placeholder" data-placeholder="Địa chỉ"></span>
-                </div>
-
-                <div class="col-md-6">
-                    <textarea class="form-control" style="height: auto;" name="message" id="message" rows="4"
-                        placeholder="Ghi chú"></textarea>
-                </div>
-                <div class="add_to_cart m-3">
-                    <a href="" class="genric-btn success radius">Đặt hàng!</a>
-                </div>
-            </form>
-        </div>
-    </div> {% endcomment %}
-
-    <!-- subscribe part here -->
     <section class="subscribe_part section_padding">
         <div class="container">
             <div class="row justify-content-center">
@@ -219,6 +202,8 @@
                 var min = 1;
                 var max = 10;
 
+                var value = 1;
+
                 var els = {};
 
                 els.dec = el.prev();
@@ -228,35 +213,24 @@
                     init($(this));
                 });
 
-                el.change(function () {
-                    let value = el.val()
-                    if (value <= min)
-                        $(el).val(min);
-                    if (value >= max)
-                        $(el).val(max);
-
-                    changeTotalcost(el.val())
-                })
-
                 function init(el) {
 
                     els.dec.on('click', decrement);
                     els.inc.on('click', increment);
 
                     function decrement() {
-                        var value = el[0].value;
-                        value--;
-                        if (!min || value >= min) {
-                            el[0].value = value;
+                        if (value > min) {
+                            value--;
+                            el.html(value);
                             changeTotalcost(value)
                         }
                     }
 
                     function increment() {
-                        var value = el[0].value;
-                        value++;
-                        if (!max || value <= max) {
-                            el[0].value = value;
+
+                        if (value < max) {
+                            value++;
+                            el.html(value);                            
                             changeTotalcost(value)
                         }
                     }
