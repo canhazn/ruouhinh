@@ -2,6 +2,7 @@
 User-agent: Googlebot
 Allow: /
 Disallow: /admin
+Disallow: /thanh-toan/
 
 
 Sitemap: https://www.ruouhinh.com/sitemap.xml
