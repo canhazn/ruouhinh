@@ -77,19 +77,20 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarResponsive">
                         <ul class="navbar-nav ml-auto">
-                            <li class="nav-item active">
-                                <a class="nav-link" href="#">Home
-                                    <span class="sr-only">(current)</span>
-                                </a>
+                            <li class="nav-item active" data-toggle="collapse" data-target="#navbarResponsive">
+                                <a class="nav-link" href="#mua-ruou-online">Mua rượu online </a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">About</a>
+                            <li class="nav-item" data-toggle="collapse" data-target="#navbarResponsive">
+                                <a class="nav-link" href="#qui-trinh-nau-ruou">Qui trình nấu rượu</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Services</a>
+                            <li class="nav-item" data-toggle="collapse" data-target="#navbarResponsive">
+                                <a class="nav-link" href="#cau-hoi-thuong-gap">Câu hỏi thường gặp</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="#">Contact</a>
+                            <li class="nav-item" data-toggle="collapse" data-target="#navbarResponsive">
+                                <a class="nav-link" href="#tho-ve-ruou-hinh">Thơ về rượu Hinh</a>
+                            </li>
+                            <li class="nav-item" data-toggle="collapse" data-target="#navbarResponsive">
+                                <a class="nav-link" href="#lien-he">Liên hệ</a>
                             </li>
                         </ul>
                     </div>
@@ -106,16 +107,14 @@
 
     <!-- Footer Start-->
     <footer>
-        <div class="footer-area footer-padding">
+        <div class="footer-area mt-5">
             <div class="container">
                 <div class="row d-flex justify-content-between">
-                    <div class="col-xl-3 col-lg-3 col-md-5 col-sm-6">
+                    <div class="col-xl-5 col-lg-5 col-md-5 col-sm-6">
                         <div class="single-footer-caption mb-50">
                             <div class="single-footer-caption mb-30">
-                                <!-- logo -->
                                 <div class="footer-logo">
-                                    <a href="{% url 'trang-chu' %}"><img loading=lazy
-                                            src="{% static 'img/logo/logo2_footer.png' %}" alt="Logo"></a>
+                                    <a class="h3" href="{% url 'trang-chu' %}">Rượu Hinh</a>
                                 </div>
                                 <div class="footer-tittle">
                                     <div class="footer-pera">
@@ -129,21 +128,21 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-2 col-lg-3 col-md-3 col-sm-5">
+                    <div class="col-xl-4 col-lg-4 col-md-3 col-sm-5">
                         <div class="single-footer-caption mb-50">
                             <div class="footer-tittle">
-                                <h4>Quick Links</h4>
+                                <h4>Liên kết</h4>
                                 <ul>
-                                    <li><a href="{% url 'trang-chu' %}">Giới thiệu</a></li>
-                                    <li><a href="{% url 'cua-hang' %}">Cửa hàng rượu trắng online</a></li>
-                                    <li><a href="{% url 'qui-trinh-nau-ruou-trang' %}">Qui trình nấu rượu trắng</a></li>
-                                    <li><a href="{% url 'li-do-mua-ruou-trang' %}">Lí do mua rượu trắng tại Rượu
+                                    <li><a href="{% url 'trang-chu' %}">Mua rượu online</a></li>
+                                    <li><a href="{% url 'cua-hang' %}">Qui trình nấu rượu</a></li>
+                                    <li><a href="{% url 'qui-trinh-nau-ruou-trang' %}">Câu hỏi thường gặp về Rượu
                                             Hinh</a></li>
+                                    <li><a href="{% url 'li-do-mua-ruou-trang' %}">Thơ về Rượu Hinh</a></li>
                                 </ul>
                             </div>
                         </div>
                     </div>
-                    <div class="col-xl-3 col-lg-3 col-md-4 col-sm-7">
+                    {% comment %} <div class="col-xl-3 col-lg-3 col-md-4 col-sm-7">
                         <div class="single-footer-caption mb-50">
                             <div class="footer-tittle">
                                 <h4>Mua rượu trắng ngon</h4>
@@ -155,7 +154,7 @@
                                 </ul>
                             </div>
                         </div>
-                    </div>
+                    </div> {% endcomment %}
                     <div class="col-xl-3 col-lg-3 col-md-5 col-sm-7">
                         <div class="single-footer-caption mb-50">
                             <div class="footer-tittle">
@@ -171,17 +170,16 @@
                     </div>
                 </div>
                 <!-- Footer bottom -->
-                <div class="row align-items-center">
+                <div class="row">
                     <div class="col-xl-7 col-lg-8 col-md-7">
                         <div class="footer-copy-right">
                             <p>
-                                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                                 Copyright &copy;<script>
                                     document.write(new Date().getFullYear());
-                                </script> All rights reserved | This template is made with <i class="fa fa-heart"
-                                    aria-hidden="true"></i> by <a href="https://colorlib.com"
-                                    target="_blank">Colorlib</a>
-                                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                                </script> All rights reserved | This site is made with <i class="fa fa-heart"
+                                    aria-hidden="true"></i> by <a href="https://fb.com/canhazn" target="_blank">Anh
+                                    Nguyễn</a>
+
                             </p>
                         </div>
                     </div>
@@ -189,7 +187,7 @@
                         <div class="footer-copy-right f-right">
                             <!-- social -->
                             <div class="footer-social">
-                                <a href="https://blog.ruouhinh.com"><i class="fab fa-blogger"></i></a>
+                                <a class="mx-3" href="https://blog.ruouhinh.com"><i class="fab fa-blogger"></i></a>
                                 <a href="https://www.facebook.com/ruouhinh"><i class="fab fa-facebook-f"></i></a>
                             </div>
                         </div>

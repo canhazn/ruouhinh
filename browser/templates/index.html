@@ -31,8 +31,7 @@
 </style>
 <main class="">
 
-    <div class="greating-area">
-
+    <div class="greating-area container p-0">
         <div id="myCarousel" class="carousel slide" data-ride="carousel">
             <ol class="carousel-indicators">
                 <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
@@ -41,9 +40,13 @@
             </ol>
             <div class="carousel-inner">
                 <div class="carousel-item active">
+                    <svg class="bd-placeholder-img" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg"
+                        preserveAspectRatio="xMidYMid slice" focusable="false" role="img">
+                        <rect width="100%" height="100%" fill="#777"></rect>
+                    </svg>
+                    <img src="/browser/static/img/gallery/carousel1.jpeg" class="d-block" alt="...">
                     <div class="">
-                        <img src="/browser/static/img/gallery/carousel1.png" class="d-block w-100" alt="...">
-                        <div class="carousel-caption text-left">                            
+                        <div class="carousel-caption text-left">
                             <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta
                                 gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
                             <p><a class="btn btn-lg btn-primary" href="#" role="button">Sign up today</a></p>
@@ -51,7 +54,8 @@
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <div class="container">
+                    <img src="/browser/static/img/gallery/carousel2.jpeg" class="d-block" alt="...">
+                    <div class="">
                         <div class="carousel-caption">
                             <h1>Another example headline.</h1>
                             <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta
@@ -61,7 +65,8 @@
                     </div>
                 </div>
                 <div class="carousel-item">
-                    <div class="container">
+                    <img src="/browser/static/img/gallery/carousel3.jpeg" class="d-block" alt="...">
+                    <div class="">
                         <div class="carousel-caption text-right">
                             <h1>One more for good measure.</h1>
                             <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta
@@ -82,61 +87,285 @@
         </div>
     </div>
 
-    <div class="shop-area row">
-        <div class="col-12   text-center">
-            <h1 class="h2">Rượu trắng ngon</h1>
+    <section class="shop-area container">
+
+        <div class="row">
+
+            <div class="title-section col-12 text-center mb-5">
+                <h1 class="h3">Rượu trắng ngon</h1>
+            </div>
+            <div class="col-md-6 product-area text-center">
+                <img class="img-fluid m-auto" src="/browser/static/img/gallery/ruou-trang-can-20-lit.png"
+                    alt="ruou-trang-ngon">
+                <p>Rượu trắng can 20 lít 600.000 đ/can</p>
+            </div>
+            <div class="col-md-6">
+                <p>Rượu uống êm, nó sẽ đem lại những phút giây hứng khởi trên bàn rượu của quý khách. Rượu uống say
+                    song
+                    là say, không bao giờ sợ đâu đầu. Nồng độ: 28 độ (liên hệ hotline để đặt rượu nồng độ cao hơn).</p>
+
+                <span id="mua-ruou-online" class="anchor"></span>
+                <h2 class="h4">Mua rượu online</h2>
+                <form id="checkout-form" class="row contact_form" action="" method="post">
+                    {% csrf_token %}
+                    <div class="col-12 form-group">
+                        <input type="number" class="form-control inline-block" id="quantity" name="quantity"
+                            placeholder="Số can" min="1" max="10" required />
+                        <small id="quantity" class="text-muted">
+                            600.000 đồng/can
+
+                        </small>
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Họ và tên"
+                            required />
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <input type="text" class="form-control" id="phone" name="phone" placeholder="Số điện thoại"
+                            required />
+                    </div>
+                    <div class="col-md-12 form-group">
+                        <input type="text" class="form-control" id="address" name="address" placeholder="Địa chỉ"
+                            required />
+                    </div>
+                    <div class="col-md-12 form-group">
+                        <textarea class="form-control" name="note" id="note" rows="3" placeholder="Ghi chú"></textarea>
+                    </div>
+                    <input type="hidden" name="product" value="{{ product.id }}">
+                    <div class="col-md-12 form-group">
+                        <input type="submit" class="btn btn-primary btn-block" name="submit" value="Đặt rượu">
+                    </div>
+                </form>
+            </div>
         </div>
-        <div class="col-md-8 product-area">
-            <img class="img-fluid" src="/media/ruou-hinh/ruou-trang-20-lit/ruou-trang-20-lit_new_product1.png"
-                alt="ruou-trang-ngon">
-            <p>Rượu trắng 20 lít</p>
-            <p>Rượu uống rất êm, nó sẽ đem lại những phút giây hứng khởi trên bàn rượu của quý khách. Rượu uống say song
-                là say, không bao giờ sợ đâu đầu. Nồng độ: 28 độ (liên hệ hotline để đặt rượu nồng độ cao hơn).</p>
+    </section>
+
+    <section class="container">
+        <span id="qui-trinh-nau-ruou" class="anchor"></span>
+        <div class="title-section col-12 text-center mb-5">
+            <h2 class="h3">Qui trình nấu rượu thủ công</h2>
         </div>
-
-        <div class="col-md-4">
-            <h2 class="h4">Mua rượu trắng online</h2>
-            <form id="checkout-form" class="row contact_form" action="" method="post">
-                {% csrf_token %}
-                <div class="col-md-6 form-group">
-                    <input type="text" class="form-control" id="customer" name="customer" placeholder="Họ và tên"
-                        required />
-                </div>
-                <div class="col-md-6 form-group">
-                    <input type="text" class="form-control" id="phone" name="phone" placeholder="Số điện thoại"
-                        required />
-                </div>
-                <div class="col-md-12 form-group">
-                    <input type="text" class="form-control" id="address" name="address" placeholder="Địa chỉ"
-                        required />
-                </div>
-                <div class="col-md-12 form-group">
-                    <textarea class="form-control" name="note" id="note" rows="3" placeholder="Ghi chú"></textarea>
-                </div>
-                <input type="hidden" name="quantity" value="{{ quantity }}">
-                <input type="hidden" name="product" value="{{ product.id }}">
-                <input type="submit" name="submit" value="Đặt rượu">
-            </form>
+        <p>Nguyên liệu để nấu rượu trắng là gạo tẻ và men bắc. Phương pháp được tin cậy của mọi người. Rượu nấu ra không
+            lo chất hóa học</p>
+        <h3>1, Nấu cơm rượu</h3>
+        <div class="row">
+            <div class="col-md-6 p-3">
+                <img class="w-100" src="/browser/static/img/gallery/nau-com-ruou.jpeg" alt="">
+            </div>
+            <div class="col-md-6">
+                <p>Sử dụng gạo tẻ. Mỗi nồi sẽ nấu 12-13 cân gạo. Một lần nấu hai nồi cơm như vậy. Cơm nấu xong cần phải
+                    đạt tiêu trí: không cháy, không nhả, nở tốt, ít dính. Như vậy men rượu sẽ có thể bám vào hạt cơm
+                    và hoạt động tốt.</p>
+            </div>
         </div>
-
-    </div>
-
-
-    <div class="video-area">
-        <h2>Rượu hinh về quê để thưởng thức thứ rượu bình dị thôn quê.</h2>
-    </div>
-
-    <div class="">
-        <h2>Rượu trắn được nấu thủ công từ gạo tẻ và men bắc</h2>
-        <p>Là phương pháp được tin cậy của mọi người. Rượu nấu ra không lo chất hóa học</p>
-        <h3>1, Nấu cơm</h3>
         <h3>2, Ủ men</h3>
+        <div class="row">
+            <div class="col-md-6 p-3">
+                <img class="w-100" src="/browser/static/img/gallery/u-men-ruou.jpeg" alt="">
+            </div>
+            <div class="col-md-6">
+                <p> Lấy 50-52 quả men dã nhỏ. Để cơm nguội, sau đó rắc men và trộn đều. Tránh để cơm còn nóng hoặc nguội
+                    quá lạnh, tránh nước. Sau khi rắc men để 2-3 ngày khi thấy cơm đã rỉ rước rượu, không còn nóng, đem
+                    đổ nước vào. Ủ nước trong khoảng 7-10 ngày.</p>
+            </div>
+        </div>
+
         <h3>3, Chưng cất</h3>
-    </div>
-    <h2>Mùi rượu của Hinh - nhà thơ Bình Minh.</h2>
+        <div class="row">
+            <div class="col-md-6 p-3">
+                <img class="w-100" src="/browser/static/img/gallery/chung-cat-ruou.jpeg" alt="">
+            </div>
+            <div class="col-md-6">
+                <p>Giữ lửa không quá to, mai rùa luôn đủ nước. Rượu đầu là rượu nặng, cần để riêng để pha. Rượu giữa là
+                    rượu ngon nhất, vừa nhất. Lấy rượu cho đến khi rượu nhạt và có vị chua thì dừng lại. Bỗng rượu còn
+                    lại có thể pha đường ăn rất ngon.</p>
+            </div>
+        </div>
+    </section>
 
-    <h2>Thắc mắc về rượu trắng tại Rượu Hinh</h2>
+    <section class="video-area container">
+        <span class="anchor"></span>
+        <div class="title-section col-12 text-center mb-5">
+            <h2 class="h3">Về quê để thưởng thức thứ rượu bình dị thôn dã.</h2>
+        </div>
+    </section>
 
-    <h02>Liên hệ</h2>
+    <section class="poem-area container">
+        <span id="tho-ve-ruou-hinh" class="anchor"></span>
+        <div class="title-section col-12 text-center mb-5">
+            <h2 class="h3">Mùi rượu của Hinh - <i>Bình Minh phương xa</i></h2>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="poem" style="margin: 0 10%">
+                    <p class="">
+                        Nghe tin Hinh nấu rượu chi,<br>
+                        Ngô hay nếp tẻ, rượu gì thơm thơm!<br>
+                        Gạo ngâm say sát, gạo nấu cơm<br>
+                        Bây giờ công nghệ bơm ngay vào nồi.
+                    </p>
+
+                    <p class="">
+                        Hinh Tôi đảm bảo rượu gạo sôi<br>
+                        Nấu cơm cho nở để rồi nguội đi<br>
+                        Men sâu dã nhỏ để khi<br>
+                        Nguội cơm tay rắc men thì ngày xưa
+                    </p>
+
+                    <p class="">
+                        Men này bỗng ngọt, người ưa<br>
+                        Vào nồi Hinh nấu đủ vừa nâng ly<br>
+                        Nhà nấu miệng nấu tỳ tỳ<br>
+                        Mấy nồi thêm thắt chỉ vì vui vui
+                    </p>
+
+                    <p class="">
+                        Bảy hôm men lá dậy mùi<br>
+                        Chậu hông, rùa ống, củi thui, lừa hồng<br>
+                        Chỗ thì chai lọ bi đông<br>
+                        Rượu Hinh đảm bảo chứ không sợ gì
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="poem" style="margin: 0 10%">
+                    <p class="">
+                        Trai cấm vừa uống vừa đi<br>
+                        Rượu ngon nhớ mùi chỉ vì bọn sâu<br>
+                        Rượu Hinh uống rất nhớ lâu<br>
+                        Người người nghe chuyện thấy đâu bao giờ
+                    </p>
+
+                    <p class="">
+                        Nhiều người chẳng biết chẳng ngờ<br>
+                        Có ai giới thiệu bao giờ mà hay<br>
+                        Người ta nấu rượu ngô cay<br>
+                        Còn Hinh nấu rượu gạo say tuyệt vời
+                    </p>
+
+                    <p class="">
+                        Men nồng nếp tẻ bốc hơi<br>
+                        Cả làng ngửi thấy, dã dời chân tay<br>
+                        Men nồng nếp tẻ bốc hơi<br>
+                        Cả làng ngưởi thấy dã dời chân tay
+                    </p>
+
+                    <p class="">
+                        Hôm nay mới biết, mới hay<br>
+                        Hinh về nấu rượu gạo xay rõ ràng<br>
+                        Thôi thì thêm thắt vui làng<br>
+                        Người quen nguồn gốc rõ ràng sợ chi<br>
+                        Cứ vui cứ uống ly bì<br>
+                        Rượu Hinh nấu uống sợ chi thằng nào
+                    </p>
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-md-6 m-auto pl-5 text-right">
+                <p>10/5/2017 Chiều hè ngửi thấy mùi thơm nhà Hinh</p>
+            </div>
+        </div>
+
+
+        <br>
+    </section>
+
+
+    <section class="faq-area container">
+        <span id="cau-hoi-thuong-gap" class="anchor"></span>
+        <div class="title-section col-12 text-center mb-5">
+            <h2 class="h3">Câu hỏi về Rượu Hinh</h2>
+        </div>
+        <div class="accordion col-md-8 p-0 m-auto faq" id="accordionExample">
+            <div class="card">
+                <div class="card-header" id="headingOne">
+                    <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse"
+                        data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        1. Rượu trắng tại Rượu Hinh khác gì rượu trên thị trường?
+                    </button>
+                </div>
+
+                <div id="collapseOne" class="collapse show" aria-labelledby="headingOne"
+                    data-parent="#accordionExample">
+                    <div class="card-body">
+                        <p>Rượu không có gì nổi bật thì làm sao cạnh tranh được với thị trường? Rượu Hinh đúng là không
+                            có gì gọi là điểm nổi trội khác biệt hoàn toàn. Rượu Hinh chỉ là thứ rượu rất bình dị gần
+                            gũi với đời sống miền quê đơn giải. Đặc điểm để cạnh tranh thị trường không cao, chỉ mong
+                            đóng góp một hương vị đầy dản dị đến thị trường rượu trắng hiện nay.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" id="headingTwo">
+                    <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse"
+                        data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                        2. Giá Rượu Hinh có đắt không?
+                    </button>
+                </div>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <p>
+                            Rượu Hinh rẻ.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header" id="headingThree">
+                    <button class="btn btn-link btn-block text-left" type="button" data-toggle="collapse"
+                        data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+                        3. Rượu Hinh có phải rượu rởm không?
+                    </button>
+                </div>
+                <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                    <div class="card-body">
+                        <p>Luôn mong làm rượu tốt để bán: phải làm rượu tốt thì mới bán được giá cao và được bà con ủng
+                            hộ. Không hề có chuyện làm rượu rởm để ăn lời. Luôn cố gắng để đảm bảo chất lượng rượu tốt
+                            hơn, nhưng khó tránh khỏi sai sót khi nấu số lượng rượu lớn, bất kì khách hàng nào gặp vấn
+                            đề về chất lượng rượu tại rượu Hinh xin liên hệ hotline để được hỗ trợ.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="contact container p-0">
+        <span id="lien-he" class="anchor"></span>
+        <div class="title-section col-12 text-center mb-5">
+            <h2 class="h3">Liên hệ</h2>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div id="map" style="width:100%; position: relative; overflow: hidden;">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3713.5415679784314!2d105.54021981430513!3d21.44725687873682!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3134e903edc2faad%3A0xc1bfd8d4cc65c761!2zbmjDoCBIaW5oIE3hur9u!5e0!3m2!1sen!2s!4v1599114801124!5m2!1sen!2s"
+                            width="100%" height="100%" frameborder="0" style="border:0;" allowfullscreen=""
+                            aria-hidden="false" tabindex="0"></iframe>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="media contact-info">
+                        <span class="contact-info__icon"><i class="ti-home"></i></span>
+                        <div class="media-body">
+                            <h3 class="h5">Nhà Hinh Mến - Suối Đùm</h3>
+                            <p>Đại Đình - Tam đảo - Vĩnh Phúc.</p>
+                        </div>
+                    </div>
+                    <div class="media contact-info">
+                        <span class="contact-info__icon"><i class="ti-tablet"></i></span>
+                        <div class="media-body">
+                            <h3 class="h5">Số điện thoại: <a href="tel:0963697819" class="text-muted">0963 697 819</a>
+                            </h3>
+                            <p>Mon to Fri 9am to 6pm</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 </main>
 {% endblock content %}
