@@ -1,5 +1,6 @@
 html {
     scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
 }
 
 body {
@@ -29,8 +30,7 @@ body {
 .carousel-item img {
     position: absolute;
     top: 0;
-    left: 0;
-    /* min-width: 100%; */
+    left: 0;    
     height: 32rem;
 }
 
