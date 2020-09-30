@@ -20,8 +20,6 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
         integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-    <link rel="stylesheet" href="{% static 'css/fontawesome-all.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
     <!-- Google Fonts -->
     <link
@@ -77,7 +75,7 @@
                     </button>
                     <div class="collapse navbar-collapse" id="navbarResponsive">
                         <ul class="navbar-nav ml-auto">
-                            <li class="nav-item active" data-toggle="collapse" data-target="#navbarResponsive">
+                            <li class="nav-item" data-toggle="collapse" data-target="#navbarResponsive">
                                 <a class="nav-link" href="#mua-ruou-online">Mua rượu online </a>
                             </li>
                             <li class="nav-item" data-toggle="collapse" data-target="#navbarResponsive">
@@ -133,28 +131,17 @@
                             <div class="footer-tittle">
                                 <h4>Liên kết</h4>
                                 <ul>
-                                    <li><a href="{% url 'trang-chu' %}">Mua rượu online</a></li>
-                                    <li><a href="{% url 'cua-hang' %}">Qui trình nấu rượu</a></li>
-                                    <li><a href="{% url 'qui-trinh-nau-ruou-trang' %}">Câu hỏi thường gặp về Rượu
+                                    <li><a href="">Mua rượu online</a></li>
+                                    <li><a href="">Qui trình nấu rượu</a></li>
+                                    <li><a href="">Câu hỏi thường gặp về Rượu
                                             Hinh</a></li>
-                                    <li><a href="{% url 'li-do-mua-ruou-trang' %}">Thơ về Rượu Hinh</a></li>
+                                    <li><a href="">Thơ về Rượu Hinh</a></li>
+                                    <li><a href="blog.ruouhinh.com">Blog</a></li>
                                 </ul>
                             </div>
                         </div>
                     </div>
-                    {% comment %} <div class="col-xl-3 col-lg-3 col-md-4 col-sm-7">
-                        <div class="single-footer-caption mb-50">
-                            <div class="footer-tittle">
-                                <h4>Mua rượu trắng ngon</h4>
-                                <ul>
-                                    <li><a href="/cua-hang/ruou-trang-20-lit">Rượu trắng 20 lít (600 nghìn/can) </a>
-                                    </li>
-                                    <li><a href="/cua-hang/ruou-trang-10-lit">Rượu trắng 10 lít (300 nghìn/can)</a></li>
-                                    <li><a href="/cua-hang/ruou-trang-5-lit">Rượu trắng 5 lít (150 nghìn/can)</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div> {% endcomment %}
+
                     <div class="col-xl-3 col-lg-3 col-md-5 col-sm-7">
                         <div class="single-footer-caption mb-50">
                             <div class="footer-tittle">
@@ -171,25 +158,20 @@
                 </div>
                 <!-- Footer bottom -->
                 <div class="row">
-                    <div class="col-xl-7 col-lg-8 col-md-7">
+                    <div class="col-12">
                         <div class="footer-copy-right">
                             <p>
                                 Copyright &copy;<script>
                                     document.write(new Date().getFullYear());
-                                </script> All rights reserved | This site is made with <i class="fa fa-heart"
-                                    aria-hidden="true"></i> by <a href="https://fb.com/canhazn" target="_blank">Anh
+                                </script> All rights reserved | This site is made with <svg style="color: red;" width="1em" height="1em"
+                                    viewBox="0 0 16 16" class="bi bi-heart-fill" fill="currentColor"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd"
+                                        d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
+                                </svg> by <a href="https://fb.com/canhazn" target="_blank">Anh
                                     Nguyễn</a>
 
                             </p>
-                        </div>
-                    </div>
-                    <div class="col-xl-5 col-lg-4 col-md-5">
-                        <div class="footer-copy-right f-right">
-                            <!-- social -->
-                            <div class="footer-social">
-                                <a class="mx-3" href="https://blog.ruouhinh.com"><i class="fab fa-blogger"></i></a>
-                                <a href="https://www.facebook.com/ruouhinh"><i class="fab fa-facebook-f"></i></a>
-                            </div>
                         </div>
                     </div>
                 </div>
