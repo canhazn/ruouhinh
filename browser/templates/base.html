@@ -57,12 +57,6 @@
 </head>
 
 <body>
-
-    <!-- define global variable on to of body -->
-    <script language="javascript">
-        var STATIC_URL = "{% static ''%}";
-    </script>
-
     <header>
         <!-- Header Start -->
         <div class="header-area">
@@ -131,12 +125,10 @@
                             <div class="footer-tittle">
                                 <h4>Liên kết</h4>
                                 <ul>
-                                    <li><a href="">Mua rượu online</a></li>
-                                    <li><a href="">Qui trình nấu rượu</a></li>
-                                    <li><a href="">Câu hỏi thường gặp về Rượu
-                                            Hinh</a></li>
-                                    <li><a href="">Thơ về Rượu Hinh</a></li>
-                                    <li><a href="blog.ruouhinh.com">Blog</a></li>
+                                    <li><a href="#mua-ruou-online">Mua rượu online</a></li>
+                                    <li><a href="#qui-trinh-nau-ruou">Qui trình nấu rượu</a></li>
+                                    <li><a href="#cau-hoi-thuong-gap">Câu hỏi thường gặp</a></li>
+                                    <li><a href="#tho-ve-ruou-hinh">Thơ về Rượu Hinh</a></li>                                    
                                 </ul>
                             </div>
                         </div>
@@ -146,10 +138,9 @@
                         <div class="single-footer-caption mb-50">
                             <div class="footer-tittle">
                                 <h4>Hỗ trợ</h4>
-                                <ul>
-                                    <li><a href="{% url 'lien-he' %}">Liên hệ</a></li>
-                                    <li><a href="{% url 'lien-he' %}">Hỗ trợ đặt rượu</a></li>
-                                    <li><a href="{% url 'lien-he' %}">Phản ánh chất lượng</a></li>
+                                <ul>                                    
+                                    <li><a href="#">Hỗ trợ đặt rượu</a></li>
+                                    <li><a href="#">Phản ánh chất lượng</a></li>
                                     <li><a>Hotline: </a><a href="tel:0963697819">0963 697 819</a></li>
                                 </ul>
                             </div>
@@ -169,7 +160,7 @@
                                     <path fill-rule="evenodd"
                                         d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z" />
                                 </svg> by <a href="https://fb.com/canhazn" target="_blank">Anh
-                                    Nguyễn</a>
+                                    Nguyễn</a> | <a href="https://blog.ruouhinh.com">Blog</a>
 
                             </p>
                         </div>
@@ -209,5 +200,4 @@
     </script>
 
 </body>
-
 </html>
