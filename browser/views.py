@@ -1,14 +1,34 @@
-from django.shortcuts import render
-from product import models
+from django.shortcuts import render, redirect
+from product import models, forms
+from django.core.mail import send_mail
 
 
 def homePage(request):
-    queryset = models.Product.objects.all()
 
-    return render(request, 'index.html', {
-        "app_url": "home",
-        "products": queryset
-    })
+    if request.method == "POST":
+        form = forms.OrderForm(request.POST)
+        if form.is_valid():
+            instance = form.save()
+            message = "%s - %s - %s - %s - %s" % (instance.phone,
+                                                  instance.name,
+                                                  instance.address,
+                                                  instance.quantity,
+                                                  instance.note)
+            send_mail(subject="Money coming babe :)", message=message,
+                      from_email='ruouhinh@gmail.com',
+                      recipient_list=["canhazn@gmail.com"],
+                      fail_silently=False)
+            # print(instance)
+            return redirect("thanh-toan-thanh-cong", instance.id)
+
+    else:
+        print("fomr invalid")
+
+    context = {
+        "form": forms.OrderForm()
+    }
+
+    return render(request, 'index.html', context)
 
 
 def lido(request):

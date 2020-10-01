@@ -12,8 +12,7 @@ admin.site.register(models.Product, ProductAdmin)
 
 
 class OrderAdmin(SummernoteModelAdmin):
-    list_display = ["customer", "product",
-                    "quantity", "address", "note", "delivered"]
+    list_display = ["name", "quantity", "address", "note", "delivered"]
 
 
 admin.site.register(models.Order, OrderAdmin)

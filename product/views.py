@@ -20,7 +20,7 @@ def checkout(request):
         form = forms.OrderForm(request.POST)
         if form.is_valid():
             instance = form.save()
-            message = "%s - %s - %s - %s - %s" % (instance.customer,
+            message = "%s - %s - %s - %s - %s" % (instance.name,
                                                   instance.address,
                                                   instance.phone,
                                                   instance.quantity,
@@ -46,12 +46,8 @@ def checkout(request):
 def confirmation(request, pk):
 
     order = get_object_or_404(models.Order, id=pk)
-    product = get_object_or_404(models.Product, id=order.product.id)
-    print(product)
-
     context = {
-        "order": order,
-        "product": product
+        "order": order
     }
 
     return render(request, "confirmation.html", context)
