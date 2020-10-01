@@ -24,12 +24,10 @@ class Product(models.Model):
 
 
 class Order(models.Model):
-    customer = models.CharField(max_length=200, null=False, blank=False)
+    name = models.CharField(max_length=200, null=False, blank=False)
     phone = models.CharField(max_length=20, null=False, blank=False)
     address = models.CharField(max_length=200, null=False, blank=False)
     note = models.CharField(max_length=200, null=True, blank=True, default="")
     created_on = created_on = models.DateTimeField(auto_now_add=True)
-    product = models.ForeignKey(
-        Product, on_delete=models.DO_NOTHING, blank=False, null=False)
     quantity = models.IntegerField(null=False, blank=False)
     delivered = models.BooleanField(default=False)
