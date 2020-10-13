@@ -26,7 +26,7 @@
                 </p>
                 <p>Được nhiều lời khen rằng rượu ngon, quý khách có thể yên tâm mua rượu trắng từ Rượu Hinh!</p>
                 {% endcomment %}
-                <p> Được nấu theo thủ công từ gạo tẻ và men bắc. Rượu rất dễ uống, không đau đầu.</p>
+                <p> Được nấu thủ công từ gạo tẻ và men bắc nên rượu trắng tại Rượu Hinh rất dễ uống, không đau đầu.</p>
                 <p> Rượu Hinh mang hương vị mộc mạc, bình dân dành cho những tín đồ của rượu quê. Phù hợp để tiếp
                     khách, hạ thổ hay ngâm thảo dược như chuối rừng, ba kích, sâm cau…</p>
                 <p class="mb-0">Đặc điểm:</p>
@@ -39,13 +39,16 @@
 
                 <span id="mua-ruou-online" class="anchor"></span>
                 <h2 class="h4 text-center text-md-left">Mua rượu online</h2>
+                <p class="alert alert-danger">
+                    Khuyến mãi 10% khi đặt mua online từ 5 can trở lên, áp dụng đến 30/12
+                </p>
                 <form id="checkout-form" class="row contact_form" action="" method="post">
                     {% csrf_token %}
                     <div class="col-12 form-group">
                         <input type="number" class="form-control inline-block" id="quantity" name="quantity"
                             placeholder="Số can" min="1" max="10" required />
                         <small id="quantity" class="text-muted">
-                            600.000 đồng/can 20 lít
+                            Giá: 600.000 đồng/can 20 lít
                         </small>
                     </div>
                     <div class="col-md-6 form-group">
@@ -64,7 +67,7 @@
                         <textarea class="form-control" name="note" id="note" rows="3" placeholder="Ghi chú"></textarea>
                     </div>
                     <div class="col-md-12 form-group">
-                        <input type="submit" class="btn btn-primary btn-block" name="submit" value="Đặt rượu">
+                        <input type="submit" class="btn btn-primary btn-block" name="submit" value="Đặt hàng">
                     </div>
                 </form>
             </div>
@@ -140,7 +143,7 @@
     <section class="container">
         <span id="qui-trinh-nau-ruou" class="anchor"></span>
         <div class="title-section col-12 text-center mb-2 mb-md-4">
-            <h2 class="h3">Quy trình thủ công</h2>
+            <h2 class="h3">Quy trình nấu rượu thủ công</h2>
             <p>
                 Nguyên liệu để nấu rượu trắng là gạo tẻ và men bắc. Phương pháp nấu
                 rượu tương tự như của các dân tộc vùng cao, tùy vùng miền mà có bí quyết riêng.
@@ -148,7 +151,7 @@
         </div>
         <div class="row">
             <div class="col-md-4 p-3">
-                <h3 class="h5">1, Nấu cơm rượu</h3>
+                <h3 class="h5">Bước 1: Nấu cơm rượu</h3>
                 <img loading=lazy class="w-100" src="/browser/static/img/gallery/nau-com-ruou.jpeg" alt="Nấu cơm rượu">
 
                 <p class="pt-3">
@@ -159,7 +162,7 @@
             </div>
 
             <div class="col-md-4 p-3">
-                <h3 class="h5">2, Ủ men</h3>
+                <h3 class="h5">Bước 2: Ủ men</h3>
                 <img loading=lazy class="w-100" src="/browser/static/img/gallery/u-men-ruou.JPEG" alt="Ủ men rượu">
                 <p class="pt-3">
                     Lấy 50-52 quả men dã nhỏ. Để cơm nguội, sau đó rắc men và trộn đều. Tránh để cơm còn nóng hoặc nguội
@@ -171,13 +174,13 @@
 
 
             <div class="col-md-4 p-3">
-                <h3 class="h5">3, Chưng cất rượu</h3>
+                <h3 class="h5">Bước 3: Chưng cất rượu</h3>
                 <img loading=lazy class="w-100" src="/browser/static/img/gallery/chung-cat-ruou.JPEG"
                     alt="Chưng cất rượu">
                 <p class="pt-3">
-                    Giữ lửa không quá to, mai rùa luôn đủ nước. Rượu đầu là rượu nặng, cần để riêng để pha. Rượu giữa là
-                    rượu ngon nhất, vừa nhất. Lấy rượu cho đến khi rượu nhạt và có vị chua thì dừng lại. Bỗng rượu còn
-                    lại có thể pha đường ăn rất ngon.
+                    Trong quá trình chưng cất cần giữ lửa không quá to, mai rùa luôn đủ nước. Rượu đầu thu được là rượu
+                    nặng, cần để riêng để pha. Rượu giữa là rượu ngon nhất, vừa nhất. Lấy rượu cho đến khi rượu nhạt và
+                    có vị chua thì dừng lại. Bỗng rượu còn lại có thể pha đường ăn rất ngon.
                 </p>
             </div>
         </div>
@@ -363,8 +366,8 @@
                         <div class="media-body">
                             <h3 class="h5 d-inline">Số điện thoại (hotline): </h3> <a href="tel:0963697819"
                                 class="">0963 697 819</a>
-                            <p>Mọi thắc măc, phản ánh chất lượng, hay đặt rượu,.. quý khách có thể gọi vào số hotline để
-                                được hỗ trợ.</p>
+                            <p>Mọi thắc măc, phản ánh chất lượng hay đặt rượu,... quý khách có thể gọi vào số
+                                hotline để được hỗ trợ.</p>
                             <p>Thứ Hai - Thứ sáu: 9h - 18h</p>
                         </div>
                     </div>
