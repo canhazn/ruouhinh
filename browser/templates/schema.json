@@ -1,0 +1,26 @@
+{
+	"@context": "https://schema.org/LiquorStore",
+	"@type": "LiquorStore",
+	"url": "https://www.ruouhinh.com/",
+	"logo": "https://www.ruouhinh.com/browser/static/img/logo/logo.png",	
+	"address": {
+		"@type": "PostalAddress",
+		"addressLocality": "Irvine",
+		"addressRegion": "CA",
+		"postalCode": "92618",
+		"streetAddress": "123 Happy Lane"
+	},
+	"description": "This is your business description.",
+	"name": "Gene’s Delicious Donuts",
+	"telephone": "555-111-2345",
+	"openingHours": "Mo,Tu,We,Th,Fr 09:00-17:00",
+	"geo": {
+		"@type": "GeoCoordinates",
+		"latitude": "40.75",
+		"longitude": "73.98"
+	},
+	"sameAs": ["http://www.facebook.com/your-profile",
+		"http://www.twitter.com/your-profile",
+		"http://plus.google.com/your-profile"
+	]
+}
