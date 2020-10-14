@@ -12,8 +12,11 @@
     {
         "@context": "https://schema.org/",
         "@type": "LiquorStore",
+        "@id": "https://www.ruouhinh.com/",
+        "url": "https://www.ruouhinh.com/",
         "name": "Rượu Hinh",
         "address": "Đại Đình, Tam Đảo, Vĩnh Phúc",
+        "hasMap": "https://www.google.com/maps/place//data=!4m2!3m1!1s0x3134e903edc2faad:0xc1bfd8d4cc65c761",
         "telephone": "+84963697819",
         "priceRange": "600000đ",
         "image": [
@@ -25,7 +28,10 @@
         "brand": {
             "@type": "Brand",
             "name": "Rượu Hinh"
-        }
+        },
+        "sameAs": [
+            "https://www.facebook.com/ruouhinh"
+        ]
     }
 </script>
 {% endblock extrahead %}
@@ -216,8 +222,13 @@
 
     <section class="poem-area container">
         <span id="tho-ve-ruou-hinh" class="anchor"></span>
-        <div class="title-section col-12 text-center mb-2 mb-md-4">
-            <h2 class="h3">Mùi rượu của Hinh</h2>
+        <div class="row mb-2 mb-md-4">
+            <div class="title-section col-12 text-center">
+                <h2 class="h3">Mùi rượu của Hinh</h2>
+            </div>
+            <div class="col-md-6 m-auto pr-5 text-right text-secondary">
+                <i>Bình Minh phương xa</i>
+            </div>
         </div>
         <div class="row">
             <div class="col-md-6">
@@ -285,9 +296,8 @@
 
         </div>
         <div class="row">
-            <div class="col-md-6 m-auto pl-5 text-right">
+            <div class="col-md-6 m-auto pl-5 text-right text-secondary">
                 <i>10/5/2017 chiều hè ngửi thấy mùi thơm nhà Hinh</i> <br>
-                <i>Bình Minh phương xa</i>
             </div>
         </div>
 
