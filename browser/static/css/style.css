@@ -7,9 +7,26 @@ body {
     padding-top: 56px;
 }
 
+.video {
+    margin: 15px 0;
+    position: relative;
+    padding-top: 56.25%;
+
+}
+
+.video iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+
 footer {
     background-color: #eaeaeb;
 }
+
 
 
 /* CUSTOMIZE THE CAROUSEL
@@ -34,7 +51,7 @@ footer {
 .carousel-item img {
     position: absolute;
     top: 0;
-    left: 0;    
+    left: 0;
     height: 32rem;
 }
 
@@ -51,7 +68,8 @@ section {
     visibility: hidden;
 }
 
-.product-area, .poem-area {
+.product-area,
+.poem-area {
     background-image: url('../img/hero/about_hero.png');
 
 }
