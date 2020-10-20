@@ -3,6 +3,10 @@ html {
     -webkit-overflow-scrolling: touch;
 }
 
+.bg-custom {
+    background-image: url('../img/hero/about_hero.png');
+}
+
 body {
     padding-top: 56px;
 }
@@ -57,7 +61,7 @@ footer {
 
 
 section {
-    padding-top: 25px;
+    padding: 25px 0;
     margin-top: 25px;
 }
 
