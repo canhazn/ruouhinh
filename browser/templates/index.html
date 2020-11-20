@@ -36,239 +36,15 @@
 
 {% block content %}
 <main>
-    <div class="shop-area container mt-3">
-        <div class="row">
-            <div class="title-section col-12 text-center mb-2 mb-md-4">
-            </div>
-            <div class="col-md-6">
-                <h1 class="h3 text-center text-md-left">Rượu trắng tại Rượu Hinh</h1>
-                {% comment %} <p class="pt-3 pt-sm-0">
-                    <strong>Rượu uống êm,</strong> nó sẽ đem lại những phút giây hứng khởi trên bàn rượu của quý khách.
-                    Nhờ nấu thủ công từ gạo tử và men bắc, rượu có<strong> mùi rất thơm</strong>, hương vị nồng nàn đặc
-                    trưng: vừa cay, vừa nồng lại có chút ngọt ngọt. <strong> Rượu uống say song là say, không bao giờ sợ
-                        đâu đầu</strong>. Nồng độ: 28 độ (liên hệ hotline để đặt rượu nồng độ cao hơn).
-                </p>
-                <p>Được nhiều lời khen rằng rượu ngon, quý khách có thể yên tâm mua rượu trắng từ Rượu Hinh!</p>
-                {% endcomment %}
-                <p> Được nấu thủ công từ gạo tẻ và men bắc, rượu trắng tại Rượu Hinh rất dễ uống, không đau đầu.</p>
-                <p> Rượu Hinh mang hương vị mộc mạc, bình dân dành cho những tín đồ của rượu quê. Phù hợp để tiếp
-                    khách, hạ thổ hay ngâm thảo dược như chuối rừng, ba kích, sâm cau…</p>
-                <p class="mb-0">Đặc điểm:</p>
-                <ul>
-                    <li>Màu rượu: hơi đục khi mới nấu, trong suốt khi để lâu.</li>
-                    <li>Vị rượu: cay, ngọt, nồng, đắng.</li>
-                    <li>Mùi rượu: thoang thoảng mùi gạo tẻ cộng với hơi men cay nồng.</li>
-                    <li>Nồng độ rượu: 32 độ.</li>
-                </ul>
-
-                <span id="mua-ruou-online" class="anchor"></span>
-                <h2 class="h4 text-center text-md-left">Mua rượu online</h2>
-                <form id="checkout-form" class="row contact_form" action="" method="post">
-                    {% csrf_token %}
-                    <div class="col-12 form-group">
-                        <input type="number" class="form-control inline-block" id="quantity" name="quantity"
-                            placeholder="Số can" min="1" max="10" required />
-                        <small id="quantity" class="text-muted">
-                            Giá: 600.000 đồng/can 20 lít
-                        </small>
-                    </div>
-                    <div class="col-md-6 form-group">
-                        <input type="text" class="form-control" id="name" name="name" placeholder="Họ và tên"
-                            required />
-                    </div>
-                    <div class="col-md-6 form-group">
-                        <input type="text" class="form-control" id="phone" name="phone" placeholder="Số điện thoại"
-                            required />
-                    </div>
-                    <div class="col-md-12 form-group">
-                        <input type="text" class="form-control" id="address" name="address" placeholder="Địa chỉ"
-                            required />
-                    </div>
-                    <div class="col-md-12 form-group">
-                        <textarea class="form-control" name="note" id="note" rows="3" placeholder="Ghi chú"></textarea>
-                    </div>
-                    <div class="col-md-12 form-group">
-                        <input type="submit" class="btn btn-primary btn-block" name="submit" value="Đặt hàng">
-                    </div>
-                </form>
-            </div>
-            <div class="col-md-6 product-area text-center pt-md-5">
-                <img class="img-fluid m-auto" src="/browser/static/img/product/ruou-trang-can-20-lit.png"
-                    alt="rượu trắng can 20 lít">
-                <p>Rượu trắng can 20 lít 600.000 đ/can</p>
-            </div>
-        </div>
-    </div>
-
-
-    <!-- Carousel -->
-    <section class="greating-area container px-0">
-        <div id="myCarousel" class="carousel slide" data-ride="carousel">
-            <ol class="carousel-indicators">
-                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-                <li data-target="#myCarousel" data-slide-to="1"></li>
-                <li data-target="#myCarousel" data-slide-to="2"></li>
-            </ol>
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <picture>
-                        <source media="(max-width:576px)" srcset="/browser/static/img/gallery/carousel1-576w.jpg">
-                        <img loading=lazy src="/browser/static/img/gallery/carousel1.jpg" alt="Rượu ngon rượu Hinh"
-                            style="width:auto;">
-                    </picture>
-
-                    <div class="">
-                        <div class="carousel-caption text-center">
-                            <p>Tay bưng chén rượu hồng đào <br>
-                                Miệng mời quân tử uống vào cho vui</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <picture>
-                        <source media="(max-width:576px)" srcset="/browser/static/img/gallery/carousel2-576w.jpg">
-                        <img loading=lazy src="/browser/static/img/gallery/carousel2.jpeg" alt="Nấu rượu thủ công"
-                            style="width:auto;">
-                    </picture>
-                    <div class="">
-                        <div class="carousel-caption text-left">
-                            {% comment %} <p>Nấu thủ công từ gạo tẻ và men bắc để có những lít rượu ngon nhất. </p> {% endcomment %}
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <picture>
-                        <source media="(max-width:576px)" srcset="/browser/static/img/gallery/carousel3-576w.jpg">
-                        <img loading=lazy src="/browser/static/img/gallery/carousel3.JPEG" alt="Rượu êm"
-                            style="width:auto;">
-                    </picture>
-
-                    <div class="">
-                        <div class="carousel-caption text-right">
-                            {% comment %} <p>Đối ẩm ngâm thơ, nhắc đến rượu ngon thì nhớ đến thơ phú, vè vịnh. Vừa nghe đài vừa thưởng
-                                rượu.</p> {% endcomment %}
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
-        </div>
-    </section>
-
-
-    <!-- Material -->
-    <section class="material-area container ">
-        <span class="anchor"></span>
-        <div class="title-section col-12 text-center mb-2 mb-md-4">
-            <h2 class="h3">Lên men từ gạo tẻ và men bắc</h2>
-        </div>
-        <div class="row mb-md-5 mb-3 px-3">
-            <div class="col-md-8 p-0">
-                <img class="img-fluid" src="/browser/static/img/gallery/gao-te.jpg" alt="">
-            </div>
-            <div class="col-md-4 pt-md-5 p-3 bg-custom">
-                <h3 class="h5">Gạo tẻ</h3>
-                <p>Cụ thể là gạo xay - loại gạo chỉ được xát xơ qua, bóc bớt đi lớp màng cám mỏng ngoài cùng và
-                    loại bỏ phôi nhưng vẫn giữ lại lớp cám thứ 2, thứ 3 để lấy hương cho rượu, hơn nữa lớp cám này chứa
-                    nhiều vitamin B1 rất tốt cho sức khỏe.</p>
-            </div>
-        </div>
-
-        <div class="row px-3">
-            <div class="col-md-4 pt-md-5 p-3 bg-custom">
-                <h3 class="h5">Men bắc</h3>
-                <p>Theo những “cây đa, cây đề” về rượu: men rượu phải tốt thì rượu mới thơm, uống mới êm và
-                    không đau đầu. Rượu Hinh được ủ từ thứ men gia truyền, làm theo công thức từ xa xưa để lại với thành
-                    phần là gạo nếp và trên 30 vị thuốc bắc và các bí quyết ngâm ủ, nuôi men công phu.</p>
-            </div>
-            <div class="col-md-8 p-0">
-                <img class="img-fluid" src="/browser/static/img/gallery/men-bac.jpg" alt="">
-            </div>
-        </div>
-    </section>
-
-
-    <!-- Qui trinh nau ruou -->
-    <section class="container">
-        <span id="qui-trinh-nau-ruou" class="anchor"></span>
-        <div class="title-section col-12 text-center mb-2 mb-md-4">
-            <h2 class="h3">Quy trình nấu rượu thủ công</h2>
-            <p class="mx-md-5 px-md-5">
-                Nguyên liệu để nấu rượu trắng là gạo tẻ và men bắc. Phương pháp nấu
-                rượu tương tự như của các dân tộc vùng cao, tùy vùng miền mà có bí quyết riêng.
-            </p>
-        </div>
-        <div class="row">
-            <div class="col-md-4 p-3">
-                <img loading=lazy class="w-100" src="/browser/static/img/gallery/nau-com-ruou.jpg" alt="Nấu cơm rượu">
-                <div class="bg-custom p-3">
-                    <h3 class="h5">Bước 1: Nấu cơm rượu</h3>
-                    <p class="">
-                        Sử dụng gạo tẻ. Mỗi nồi sẽ nấu 12-13 cân gạo. Một lần nấu hai nồi cơm như vậy. Cơm nấu xong cần
-                        phải
-                        đạt tiêu trí: không cháy, không nhả, nở tốt, ít dính. Như vậy men rượu sẽ có thể bám vào hạt cơm
-                        và
-                        hoạt động tốt.
-                    </p>
-                </div>
-            </div>
-
-            <div class="col-md-4 p-3">
-                <img loading=lazy class="w-100" src="/browser/static/img/gallery/u-men-ruou.JPEG" alt="Ủ men rượu">
-                <div class="bg-custom p-3">
-                    <h3 class="h5">Bước 2: Ủ men bắc</h3>
-                    <p class="">
-                        Lấy 50-52 quả men dã nhỏ. Để cơm nguội, sau đó rắc men và trộn đều. Tránh để cơm còn nóng hoặc
-                        nguội
-                        quá lạnh, tránh nước. Sau khi rắc men để 2-3 ngày khi thấy cơm đã rỉ rước rượu, không còn nóng,
-                        đem
-                        đổ nước vào. Ủ nước trong khoảng 7-10 ngày.
-                    </p>
-                </div>
-            </div>
-
-
-
-            <div class="col-md-4 p-3">
-                <img loading=lazy class="w-100" src="/browser/static/img/gallery/chung-cat-ruou.gif"
-                    alt="Chưng cất rượu">
-                <div class="bg-custom p-3">
-                    <h3 class="h5">Bước 3: Chưng cất rượu</h3>
-                    <p class="">
-                        Trong quá trình chưng cất cần giữ lửa không quá to, mai rùa luôn đủ nước. Rượu đầu thu được là
-                        rượu
-                        nặng, cần để riêng để pha. Rượu giữa là rượu ngon nhất, vừa nhất. Lấy rượu cho đến khi rượu nhạt
-                        và
-                        có vị chua thì dừng lại. Bỗng rượu còn lại có thể pha đường ăn rất ngon.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-    <!-- 30 years experience -->
-    <section class="years-experience-area container">
-        <span id="years-experience" class="anchor"></span>
-        <div class="row">
-            <div class="title-section col-md-4 col-6 mx-auto text-center">
-                <img class="img-fluid" src="/browser/static/img/gallery/30-nam-nau-ruou-thu-cong.png"
-                    alt="30 năm nấu rượu">
-                <h3 class="h5 pt-3 m-0">30 năm nấu rượu</h3>
-            </div>
-        </div>
-    </section>
-
-
     <!-- poem -->
-    <section class="poem-area container pb-0">
+    <div class="poem-area container pb-3">
+        <div class="video-area mb-3" style="margin: 0 -15px">
+            <div class="video">
+                <iframe title="Rượu Hinh"
+                    src="https://www.youtube.com/embed/PoSgyi_Lvl8?vq=hd1080&autoplay=1&loop=1&rel=0&controls=0"
+                    frameborder="0"></iframe>
+            </div>
+        </div>
         <span id="tho-ve-ruou-hinh" class="anchor"></span>
         <div class="row mb-2 mb-md-4">
             <div class="title-section col-12 text-center">
@@ -348,16 +124,239 @@
                 <i>10/5/2017 chiều hè ngửi thấy mùi thơm nhà Hinh</i> <br>
             </div>
         </div>
-        <div class="video-area" style="margin: 0 -15px">
-            <div class="video">
-                <iframe title="Rượu Hinh"
-                    src="https://www.youtube.com/embed/PoSgyi_Lvl8?vq=hd1080&autoplay=1&loop=1&rel=0&controls=0"
-                    frameborder="0"></iframe>
+    </div>
+
+    <!-- Carousel -->
+    <section class="greating-area container px-0">
+        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+                <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                <li data-target="#myCarousel" data-slide-to="1"></li>
+                <li data-target="#myCarousel" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <picture>
+                        <source media="(max-width:576px)" srcset="/browser/static/img/gallery/carousel1-576w.jpg">
+                        <img loading=lazy src="/browser/static/img/gallery/carousel1.jpg" alt="Rượu ngon rượu Hinh"
+                            style="width:auto;">
+                    </picture>
+
+                    <div class="">
+                        <div class="carousel-caption text-center">
+                            <p>Tay bưng chén rượu hồng đào <br>
+                                Miệng mời quân tử uống vào cho vui</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <picture>
+                        <source media="(max-width:576px)" srcset="/browser/static/img/gallery/carousel2-576w.jpg">
+                        <img loading=lazy src="/browser/static/img/gallery/carousel2.jpeg" alt="Nấu rượu thủ công"
+                            style="width:auto;">
+                    </picture>
+                    <div class="">
+                        <div class="carousel-caption text-left">
+                            {% comment %} <p>Nấu thủ công từ gạo tẻ và men bắc để có những lít rượu ngon nhất. </p>
+                            {% endcomment %}
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <picture>
+                        <source media="(max-width:576px)" srcset="/browser/static/img/gallery/carousel3-576w.jpg">
+                        <img loading=lazy src="/browser/static/img/gallery/carousel3.JPEG" alt="Rượu êm"
+                            style="width:auto;">
+                    </picture>
+
+                    <div class="">
+                        <div class="carousel-caption text-right">
+                            {% comment %} <p>Đối ẩm ngâm thơ, nhắc đến rượu ngon thì nhớ đến thơ phú, vè vịnh. Vừa nghe
+                                đài vừa thưởng
+                                rượu.</p> {% endcomment %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </section>
+
+
+    <!-- Material -->
+    <section class="material-area container ">
+        <span class="anchor"></span>
+        <div class="title-section col-12 text-center mb-2 mb-md-4">
+            <h2 class="h3">Lên men từ gạo tẻ và men bắc</h2>
+        </div>
+        <div class="row mb-md-5 mb-3 px-3">
+            <div class="col-md-8 p-0">
+                <img class="img-fluid" src="/browser/static/img/gallery/gao-te.jpg" alt="">
+            </div>
+            <div class="col-md-4 pt-md-5 p-3 bg-custom">
+                <h3 class="h5">Gạo tẻ</h3>
+                <p>Cụ thể là gạo xay - loại gạo chỉ được xát xơ qua, bóc bớt đi lớp màng cám mỏng ngoài cùng và
+                    loại bỏ phôi nhưng vẫn giữ lại lớp cám thứ 2, thứ 3 để lấy hương cho rượu, hơn nữa lớp cám này chứa
+                    nhiều vitamin B1 rất tốt cho sức khỏe.</p>
+            </div>
+        </div>
+
+        <div class="row px-3">
+            <div class="col-md-4 pt-md-5 p-3 bg-custom">
+                <h3 class="h5">Men bắc</h3>
+                <p>Theo những “cây đa, cây đề” về rượu: men rượu phải tốt thì rượu mới thơm, uống mới êm và
+                    không đau đầu. Rượu Hinh được ủ từ thứ men gia truyền, làm theo công thức từ xa xưa để lại với thành
+                    phần là gạo nếp và trên 30 vị thuốc bắc và các bí quyết ngâm ủ, nuôi men công phu.</p>
+            </div>
+            <div class="col-md-8 p-0">
+                <img class="img-fluid" src="/browser/static/img/gallery/men-bac.jpg" alt="">
             </div>
         </div>
     </section>
 
 
+    <!-- Qui trinh nau ruou -->
+    <section class="container">
+        <span id="qui-trinh-nau-ruou" class="anchor"></span>
+        <div class="title-section col-12 text-center mb-2 mb-md-4">
+            <h2 class="h3">Quy trình nấu rượu thủ công</h2>
+            <p class="mx-md-5 px-md-5">
+                Nguyên liệu để nấu rượu trắng là gạo tẻ và men bắc. Phương pháp nấu
+                rượu tương tự như của các dân tộc vùng cao, tùy vùng miền mà có bí quyết riêng.
+            </p>
+        </div>
+        <div class="row">
+            <div class="col-md-4 p-3">
+                <img loading=lazy class="w-100" src="/browser/static/img/gallery/nau-com-ruou.jpg" alt="Nấu cơm rượu">
+                <div class="bg-custom p-3">
+                    <h3 class="h5">Bước 1: Nấu cơm rượu</h3>
+                    <p class="">
+                        Sử dụng gạo tẻ. Đại gạo trước khi nấu để loại bỏ sạn, chấu. Mỗi nồi sẽ nấu 12-13 cân gạo. Một lần nấu hai nồi cơm như vậy. Cơm nấu xong cần
+                        phải
+                        đạt tiêu trí: không cháy, không nhả, nở tốt, ít dính. Như vậy men rượu sẽ có thể bám vào hạt cơm
+                        và
+                        hoạt động tốt.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-md-4 p-3">
+                <img loading=lazy class="w-100" src="/browser/static/img/gallery/u-men-ruou.JPEG" alt="Ủ men rượu">
+                <div class="bg-custom p-3">
+                    <h3 class="h5">Bước 2: Ủ men bắc</h3>
+                    <p class="">
+                        Lấy 50-52 quả men dã nhỏ. Để cơm nguội, sau đó rắc men và trộn đều. Tránh để cơm còn nóng hoặc
+                        nguội
+                        quá lạnh, tránh nước. Sau khi rắc men để 2-3 ngày tùy theo nhiệt độ khi thấy cơm đã rỉ rước rượu, không còn nóng,
+                        đem
+                        đổ nước vào. Ủ nước trong khoảng 7-10 ngày.
+                    </p>
+                </div>
+            </div>
+
+
+
+            <div class="col-md-4 p-3">
+                <img loading=lazy class="w-100" src="/browser/static/img/gallery/chung-cat-ruou.gif"
+                    alt="Chưng cất rượu">
+                <div class="bg-custom p-3">
+                    <h3 class="h5">Bước 3: Chưng cất rượu</h3>
+                    <p class="">
+                        Trong quá trình chưng cất cần giữ lửa không quá to, mai rùa luôn đủ nước. Rượu đầu thu được là
+                        rượu
+                        nặng, cần để riêng để pha. Rượu giữa là rượu ngon nhất, vừa nhất. Lấy rượu cho đến khi rượu nhạt
+                        và
+                        có vị chua thì dừng lại. Bỗng rượu còn lại có thể pha đường ăn rất ngon.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- 30 years experience -->
+    <section class="years-experience-area container">
+        <span id="years-experience" class="anchor"></span>
+        <div class="row">
+            <div class="title-section col-md-4 col-6 mx-auto text-center">
+                <img class="img-fluid" src="/browser/static/img/gallery/30-nam-nau-ruou-thu-cong.png"
+                    alt="30 năm nấu rượu">
+                <h3 class="h5 pt-3 m-0">30 năm nấu rượu</h3>
+            </div>
+        </div>
+    </section>
+
+        <!-- shop area -->
+    <div class="shop-area container mt-3">
+        <div class="row">
+            <div class="title-section col-12 text-center mb-2 mb-md-4">
+            </div>
+            <div class="col-md-6">
+                <h1 class="h3 text-center text-md-left">Rượu Hinh nồng nàn trong từng ly rượu</h1>
+                {% comment %} <p class="pt-3 pt-sm-0">
+                    <strong>Rượu uống êm,</strong> nó sẽ đem lại những phút giây hứng khởi trên bàn rượu của quý khách.
+                    Nhờ nấu thủ công từ gạo tử và men bắc, rượu có<strong> mùi rất thơm</strong>, hương vị nồng nàn đặc
+                    trưng: vừa cay, vừa nồng lại có chút ngọt ngọt. <strong> Rượu uống say song là say, không bao giờ sợ
+                        đâu đầu</strong>. Nồng độ: 28 độ (liên hệ hotline để đặt rượu nồng độ cao hơn).
+                </p>
+                <p>Được nhiều lời khen rằng rượu ngon, quý khách có thể yên tâm mua rượu trắng từ Rượu Hinh!</p>
+                {% endcomment %}
+                <p> Được nấu thủ công từ gạo tẻ và men bắc, rượu trắng tại Rượu Hinh có mùi thơm đặc trưng, rượu rất dễ uống, không đau đầu.</p>
+                <p> Rượu Hinh mang hương vị mộc mạc, bình dân dành cho những tín đồ của rượu quê. Phù hợp để tiếp
+                    khách, hạ thổ hay ngâm thảo dược như chuối rừng, ba kích, sâm cau…</p>
+                <p class="mb-0">Đặc điểm:</p>
+                <ul>
+                    <li>Màu rượu: hơi đục khi mới nấu, trong suốt khi để lâu.</li>
+                    <li>Vị rượu: cay, ngọt, nồng, đắng.</li>
+                    <li>Mùi rượu: thoang thoảng mùi gạo tẻ cộng với hơi men cay nồng.</li>
+                    <li>Nồng độ rượu: 32 độ.</li>
+                </ul>
+
+                <span id="mua-ruou-online" class="anchor"></span>
+                <h2 class="h4 text-center text-md-left">Mua rượu online</h2>
+                <form id="checkout-form" class="row contact_form" action="" method="post">
+                    {% csrf_token %}
+                    <div class="col-12 form-group">
+                        <input type="number" class="form-control inline-block" id="quantity" name="quantity"
+                            placeholder="Số can" min="1" max="10" required />
+                        <small id="quantity" class="text-muted">
+                            Giá: 600.000 đồng/can 20 lít
+                        </small>
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Họ và tên"
+                            required />
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <input type="text" class="form-control" id="phone" name="phone" placeholder="Số điện thoại"
+                            required />
+                    </div>
+                    <div class="col-md-12 form-group">
+                        <input type="text" class="form-control" id="address" name="address" placeholder="Địa chỉ"
+                            required />
+                    </div>
+                    <div class="col-md-12 form-group">
+                        <textarea class="form-control" name="note" id="note" rows="3" placeholder="Ghi chú"></textarea>
+                    </div>
+                    <div class="col-md-12 form-group">
+                        <input type="submit" class="btn btn-primary btn-block" name="submit" value="Đặt hàng">
+                    </div>
+                </form>
+            </div>
+            <div class="col-md-6 product-area text-center pt-md-5">
+                <img class="img-fluid m-auto" src="/browser/static/img/product/ruou-trang-can-20-lit.png"
+                    alt="rượu trắng can 20 lít">
+                <p>Rượu trắng can 20 lít 600.000 đ/can</p>
+            </div>
+        </div>
+    </div>
 
     <!-- Faq -->
     <section class="faq-area container">
