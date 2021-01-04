@@ -38,16 +38,20 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'rest_framework',    
-    
+    'rest_framework',
+    'corsheaders',
+
     'browser',
     'product',
+    'core',
     'django_summernote',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -144,3 +148,8 @@ EMAIL_HOST_USER = "ruouhinh@gmail.com"
 EMAIL_HOST_PASSWORD = "9pu056094"
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
+
+
+CORS_ORIGIN_WHITELIST = [
+    'http://localhost:3000',
+]
