@@ -1,7 +1,16 @@
 from core import models, serializers
 from django.contrib.auth.models import User
 from rest_framework import viewsets
+from rest_framework.settings import api_settings
 from rest_framework import permissions
+from rest_framework.authtoken.views import ObtainAuthToken
+
+
+from rest_framework.views import APIView
+from rest_framework.permissions import AllowAny
+from rest_framework_simplejwt.tokens import RefreshToken
+from rest_framework import status
+from rest_framework.response import Response
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -12,13 +21,18 @@ class UserViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.UserSerializer
 
 
-class FactoryViewSet(viewsets.ModelViewSet):
-    """
-    Factory serializer
-    """
-    queryset = models.Factory.objects.all()
-    serializer_class = serializers.FactorySerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+class BlacklistTokenUpdateView(APIView):
+    permission_classes = [AllowAny]
+    authentication_classes = ()
+
+    def post(self, request):
+        try:
+            refresh_token = request.data["refresh_token"]
+            token = RefreshToken(refresh_token)
+            token.blacklist()
+            return Response(status=status.HTTP_205_RESET_CONTENT)
+        except Exception:
+            return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 class ProductViewSet(viewsets.ModelViewSet):
@@ -54,3 +68,7 @@ class ReceiptViewSet(viewsets.ModelViewSet):
     """
     queryset = models.Receipt.objects.all()
     serializer_class = serializers.ReceiptSerializer
+
+    def perform_create(self, serializer):
+        """ Perform create """
+        serializer.save(employer=self.request.user)

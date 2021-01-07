@@ -20,6 +20,9 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.views.generic.base import TemplateView
 
+from rest_framework.schemas import get_schema_view
+from rest_framework.documentation import include_docs_urls
+
 
 urlpatterns = [
     path(
@@ -36,8 +39,14 @@ urlpatterns = [
     path('summernote/', include('django_summernote.urls')),
     path('', include('browser.urls')),
     path('', include('product.urls')),
-    path('api/', include('core.urls'))
-
+    path('api/', include('core.urls')),
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    path('docs/', include_docs_urls(title='RuouhinhApi')),
+    path('schema/', get_schema_view(
+        title="RuouhinhApi",
+        description="API for the RuouhinhApi",
+        version="1.0.0"
+    ), name='openapi-schema'),
 ]
 
 if settings.DEBUG:

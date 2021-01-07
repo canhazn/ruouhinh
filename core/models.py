@@ -2,19 +2,20 @@ from django.db import models
 from django.contrib.auth.models import User
 
 
-class Factory(models.Model):
-    title = models.CharField(max_length=200, null=False,
-                             blank=False, default="Rượu Hinh")
-    address = models.TextField(null=False, blank=False)
-    user = models.ForeignKey(
-        User, on_delete=models.DO_NOTHING, null=True, blank=True)
-    date_created = models.DateTimeField(auto_now_add=True)
+# class Profile(models.Model):    
+#     """
+#     User profile == Factory profile
+#     """
+#     address = models.TextField(null=False, blank=False)
+#     user = models.OneToOneField(
+#         User, on_delete=models.DO_NOTHING, null=True, blank=True)
+#     date_created = models.DateTimeField(auto_now_add=True)
 
-    class Meta:
-        ordering = ["-date_created"]
+#     class Meta:
+#         ordering = ["-date_created"]
 
-    def __str__(self):
-        return "%s" % (str(self.address))
+#     def __str__(self):
+#         return "%s" % (str(self.address))
 
 
 class Product(models.Model):
@@ -32,7 +33,7 @@ class Product(models.Model):
 
 
 class Issue(models.Model):
-    factory = models.ForeignKey(Factory, on_delete=models.CASCADE)
+    employer = models.ForeignKey(User, on_delete=models.CASCADE)
     date_created = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -43,7 +44,7 @@ class Issue(models.Model):
 
 
 class ProductIssue(models.Model):
-    factory = models.ForeignKey(Factory, on_delete=models.CASCADE)
+    employer = models.ForeignKey(User, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.IntegerField(null=False, blank=False, default=1)
     date_created = models.DateTimeField(auto_now_add=True)
@@ -52,7 +53,7 @@ class ProductIssue(models.Model):
         ordering = ["-date_created"]
 
     def __str__(self):
-        return "Factory: %s, Product: %s, Quantity: %s" % (self.factory, self.product, str(self.quantity))
+        return "Profile: %s, Product: %s, Quantity: %s" % (self.employer, self.product, str(self.quantity))
 
 
 class Order(models.Model):
@@ -95,7 +96,7 @@ class Material(models.Model):
 
 
 class Receipt(models.Model):
-    factory = models.ForeignKey(Factory, on_delete=models.CASCADE)
+    employer = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
     material = models.ForeignKey(Material, on_delete=models.CASCADE)
     date_created = models.DateTimeField(auto_now_add=True)
     quantity = models.IntegerField(null=False, blank=False)
@@ -105,4 +106,4 @@ class Receipt(models.Model):
         ordering = ["-date_created"]
 
     def __str__(self):
-        return "%s" % (self.factory)
+        return "%s" % (self.employer)

@@ -25,7 +25,7 @@ admin.site.register(models.Material, MaterialAdmin)
 
 
 class ReceiptAdmin(admin.ModelAdmin):
-    list_display = ["factory", "material"]
+    list_display = ["material"]
 
 
 admin.site.register(models.Receipt, ReceiptAdmin)
