@@ -29,3 +29,10 @@ class ReceiptAdmin(admin.ModelAdmin):
 
 
 admin.site.register(models.Receipt, ReceiptAdmin)
+
+
+class UserAdmin(admin.ModelAdmin):
+    list_display = ["email"]
+
+
+admin.site.register(models.User, UserAdmin)

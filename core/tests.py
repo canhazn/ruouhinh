@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 from core import models
 
 RECEIPT_URL = reverse('core_api:receipt-list')
-TOKEN_URL = reverse('core_api:token_obtain_pair')
+TOKEN_URL = reverse('core_api:token')
 
 
 def create_user(**params):
@@ -17,16 +17,15 @@ class UserTests(APITestCase):
     def setUp(self):
         self.client = APIClient()
 
+    def sample_receipt(user, material, **params):
+        """Create and return a sample receipt"""
+        defaults = {
+            'quantity': 2,
+            'total-cost': 100000,
+        }
+        defaults.update(params)
 
-def sample_receipt(user, material, **params):
-    """Create and return a sample receipt"""
-    defaults = {
-        'quantity': 2,
-        'total-cost': 100000,
-    }
-    defaults.update(params)
-
-    return models.Receipt.objects.create(employer=user, material=material, **defaults)
+        return models.Receipt.objects.create(employer=user, material=material, **defaults)
 
 
 class ReceiptTests(APITestCase):

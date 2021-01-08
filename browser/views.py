@@ -1,31 +1,10 @@
 from django.shortcuts import render, redirect
-from product import models, forms
 from django.core.mail import send_mail
 
 
 def homePage(request):
-
-    if request.method == "POST":
-        form = forms.OrderForm(request.POST)
-        if form.is_valid():
-            instance = form.save()
-            message = "%s - %s - %s - %s - %s" % (instance.phone,
-                                                  instance.name,
-                                                  instance.address,
-                                                  instance.quantity,
-                                                  instance.note)
-            send_mail(subject="Money coming babe :)", message=message,
-                      from_email='ruouhinh@gmail.com',
-                      recipient_list=["canhazn@gmail.com"],
-                      fail_silently=False)
-            # print(instance)
-            return redirect("thanh-toan-thanh-cong", instance.id)
-
-    else:
-        print("fomr invalid")
-
     context = {
-        "form": forms.OrderForm()
+        "form": ""
     }
 
     return render(request, 'index.html', context)
@@ -43,17 +22,7 @@ def quitrinh(request):
     })
 
 
-def shop(request):
-    queryset = models.Product.objects.all()
-
-    return render(request,  "shop.html", {
-        "app_url": "cua-hang",
-        "products": queryset
-    })
-
-
 def contact(request):
-
     return render(request,  "contact.html", {
         "app_url": "lien-he",
     })

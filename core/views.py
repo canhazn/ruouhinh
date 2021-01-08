@@ -1,5 +1,5 @@
 from core import models, serializers
-from django.contrib.auth.models import User
+from django.contrib.auth import authenticate
 from rest_framework import viewsets
 from rest_framework.settings import api_settings
 from rest_framework import permissions
@@ -12,18 +12,56 @@ from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework import status
 from rest_framework.response import Response
 
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from django.conf import settings
+
+
+class UserLoginView(APIView):
+    def post(self, request):
+        serializer = serializers.LoginSerializer(data=request.data)
+        if serializer.is_valid():
+            print(serializer.validated_data)
+            user = authenticate(
+                request,
+                email=request.data["email"],
+                password=request.data["password"]
+            )
+            
+            if user:
+                refresh = TokenObtainPairSerializer.get_token(user)
+                data = {
+                    'refresh': str(refresh),
+                    'access': str(refresh.access_token),
+                    'access_expires': int(settings.SIMPLE_JWT['ACCESS_TOKEN_LIFETIME'].total_seconds()),
+                    'refresh_expires': int(settings.SIMPLE_JWT['REFRESH_TOKEN_LIFETIME'].total_seconds()),
+                    "user": {
+                        "email": user.get_username(),
+                        "factory_name": user.__getattribute__("factory_name")
+                    }
+                }
+                return Response(data, status=status.HTTP_200_OK)
+            return Response({
+                'error_message': 'Email or password is incorrect!',
+                'error_code': 400
+            }, status=status.HTTP_400_BAD_REQUEST)
+        return Response({
+            'error_messages': serializer.errors,
+            'error_code': 400
+        }, status=status.HTTP_400_BAD_REQUEST)
+
 
 class UserViewSet(viewsets.ModelViewSet):
     """
     This viewset automatically provides `list` and `retrieve` actions.
     """
-    queryset = User.objects.all()
+    queryset = models.User.objects.all()
     serializer_class = serializers.UserSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 
 class BlacklistTokenUpdateView(APIView):
     permission_classes = [AllowAny]
-    authentication_classes = ()
+    authentication_classes = ()    
 
     def post(self, request):
         try:
@@ -68,6 +106,7 @@ class ReceiptViewSet(viewsets.ModelViewSet):
     """
     queryset = models.Receipt.objects.all()
     serializer_class = serializers.ReceiptSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     def perform_create(self, serializer):
         """ Perform create """
