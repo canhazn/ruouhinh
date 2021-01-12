@@ -1,7 +1,6 @@
 from core import models
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
-from django.contrib.auth import authenticate
 
 
 class LoginSerializer(serializers.Serializer):
@@ -38,21 +37,15 @@ class ProductSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-class ProductIssueSerializer(serializers.ModelSerializer):
+class IssueSerializer(serializers.ModelSerializer):
     class Meta:
-        model = models.ProductIssue
+        model = models.Issue
         fields = "__all__"
 
 
 class OrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Order
-        fields = "__all__"
-
-
-class OrderItemSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = models.OrderItem
         fields = "__all__"
 
 
@@ -63,7 +56,7 @@ class MaterialSerializer(serializers.ModelSerializer):
 
 
 class ReceiptSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = models.Receipt
         fields = "__all__"
+

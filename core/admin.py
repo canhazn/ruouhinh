@@ -4,7 +4,6 @@ from core import models
 
 class ProductAdmin(admin.ModelAdmin):
     list_display = ["title"]
-    prepopulated_fields = {'slug': ('title', )}
 
 
 admin.site.register(models.Product, ProductAdmin)

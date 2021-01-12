@@ -1,8 +1,7 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
 from core import views
-from rest_framework_simplejwt.views import (
-    TokenObtainPairView,
+from rest_framework_simplejwt.views import (    
     TokenRefreshView,
 )
 
@@ -12,8 +11,8 @@ app_name = "core_api"
 router = DefaultRouter()
 router.register(r'users', views.UserViewSet)
 router.register(r'product', views.ProductViewSet)
-router.register(r'product-issue', views.ProductIssueViewSet)
-
+router.register(r'issue', views.IssueViewSet)
+router.register(r'order', views.OrderViewSet)
 # Material
 router.register(r'material', views.MaterialViewSet)
 router.register(r'receipt', views.ReceiptViewSet)

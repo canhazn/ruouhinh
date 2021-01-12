@@ -1,10 +1,7 @@
 from core import models, serializers
 from django.contrib.auth import authenticate
 from rest_framework import viewsets
-from rest_framework.settings import api_settings
 from rest_framework import permissions
-from rest_framework.authtoken.views import ObtainAuthToken
-
 
 from rest_framework.views import APIView
 from rest_framework.permissions import AllowAny
@@ -26,7 +23,7 @@ class UserLoginView(APIView):
                 email=request.data["email"],
                 password=request.data["password"]
             )
-            
+
             if user:
                 refresh = TokenObtainPairSerializer.get_token(user)
                 data = {
@@ -61,7 +58,7 @@ class UserViewSet(viewsets.ModelViewSet):
 
 class BlacklistTokenUpdateView(APIView):
     permission_classes = [AllowAny]
-    authentication_classes = ()    
+    authentication_classes = ()
 
     def post(self, request):
         try:
@@ -82,12 +79,12 @@ class ProductViewSet(viewsets.ModelViewSet):
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 
-class ProductIssueViewSet(viewsets.ModelViewSet):
+class IssueViewSet(viewsets.ModelViewSet):
     """
-    ProductIssue serializer
+    Issue serializer
     """
-    queryset = models.ProductIssue.objects.all()
-    serializer_class = serializers.ProductIssueSerializer
+    queryset = models.Issue.objects.all()
+    serializer_class = serializers.IssueSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
 
@@ -106,6 +103,19 @@ class ReceiptViewSet(viewsets.ModelViewSet):
     """
     queryset = models.Receipt.objects.all()
     serializer_class = serializers.ReceiptSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+    def perform_create(self, serializer):
+        """ Perform create """
+        serializer.save(employer=self.request.user)
+
+
+class OrderViewSet(viewsets.ModelViewSet):
+    """
+    Order serializer
+    """
+    queryset = models.Order.objects.all()
+    serializer_class = serializers.OrderSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     def perform_create(self, serializer):
