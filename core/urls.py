@@ -12,10 +12,11 @@ router = DefaultRouter()
 router.register(r'users', views.UserViewSet)
 router.register(r'product', views.ProductViewSet)
 router.register(r'issue', views.IssueViewSet)
-router.register(r'order', views.OrderViewSet)
-# Material
 router.register(r'material', views.MaterialViewSet)
+
+# Material
 router.register(r'receipt', views.ReceiptViewSet)
+router.register(r'order', views.OrderViewSet)
 
 # The API URLs are now determined automatically by the router.
 urlpatterns = [

@@ -1,0 +1,49 @@
+[
+    {
+        "model": "core.user",
+        "pk": 1,
+        "fields": {
+            "last_login": null,
+            "is_superuser": true,
+            "email": "admin@gmail.com",
+            "password": "pbkdf2_sha256$180000$cCo7q5HknNBa$AcB4qnPkfil29JIDprLQ/ZBRi/yWZkuSabaYo3hCqWI=",
+            "factory_name": "",
+            "is_active": true,
+            "is_staff": true,
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "core.Material",
+        "pk": 1,
+        "fields": {
+            "title": "Gạo",
+            "description": "Gạo say"
+        }
+    },
+    {
+        "model": "core.Material",
+        "pk": 2,
+        "fields": {
+            "title": "Men",
+            "description": "Men bắc"
+        }
+    },
+    {
+        "model": "core.product",
+        "pk": 1,
+        "fields": {
+            "title": "Rượu can 20 lít",
+            "price": 25000
+        }
+    },
+    {
+        "model": "core.product",
+        "pk": 2,
+        "fields": {
+            "title": "Rượu can 10 lít",
+            "price": 25000
+        }
+    }
+]

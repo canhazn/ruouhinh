@@ -41,11 +41,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 class Product(models.Model):
     title = models.CharField(max_length=200, null=False, blank=False)    
     price = models.IntegerField(default=0)
-    description = models.TextField(null=False, blank=False)
-    date_created = models.DateTimeField(auto_now_add=True)
-
-    class Meta:
-        ordering = ["-date_created"]
+    # description = models.TextField(null=False, blank=False)
 
     def __str__(self):
         return str(self.title)
@@ -65,12 +61,14 @@ class Issue(models.Model):
 
 
 class Order(models.Model):
+    employer = models.ForeignKey(User, on_delete=models.CASCADE,  default=1)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
     quantity = models.IntegerField(null=False, blank=False)
     customer_name = models.CharField(max_length=200, null=False, blank=False)
     note = models.CharField(max_length=200, null=True, blank=True, default="")
     date_created = models.DateTimeField(auto_now_add=True)
     total_cost = models.FloatField(null=False, blank=False, default=0)
+    completed = models.BooleanField(default=True)
 
     class Meta:
         ordering = ["-date_created"]
