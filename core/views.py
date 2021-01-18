@@ -11,6 +11,9 @@ from rest_framework.response import Response
 
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from django.conf import settings
+from rest_framework.filters import SearchFilter
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.decorators import api_view
 
 
 class UserLoginView(APIView):
@@ -103,6 +106,8 @@ class ReceiptViewSet(viewsets.ModelViewSet):
     """
     queryset = models.Receipt.objects.all()
     serializer_class = serializers.ReceiptSerializer
+    filter_backends = [SearchFilter, DjangoFilterBackend]
+    search_fields = ['material']
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     def perform_create(self, serializer):
@@ -116,6 +121,8 @@ class OrderViewSet(viewsets.ModelViewSet):
     """
     queryset = models.Order.objects.all()
     serializer_class = serializers.OrderSerializer
+    filter_backends = [SearchFilter, DjangoFilterBackend]
+    search_fields = ['customer_name', 'note']
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
 
     def perform_create(self, serializer):
