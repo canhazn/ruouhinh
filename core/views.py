@@ -56,7 +56,7 @@ class UserViewSet(viewsets.ModelViewSet):
     """
     queryset = models.User.objects.all()
     serializer_class = serializers.UserSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    permission_classes = [permissions.IsAuthenticated]
 
 
 class BlacklistTokenUpdateView(APIView):
@@ -79,7 +79,7 @@ class ProductViewSet(viewsets.ModelViewSet):
     """
     queryset = models.Product.objects.all()
     serializer_class = serializers.ProductSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    permission_classes = [permissions.IsAuthenticated]
 
 
 class IssueViewSet(viewsets.ModelViewSet):
@@ -88,7 +88,7 @@ class IssueViewSet(viewsets.ModelViewSet):
     """
     queryset = models.Issue.objects.all()
     serializer_class = serializers.IssueSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    permission_classes = [permissions.IsAuthenticated]
 
 
 class MaterialViewSet(viewsets.ModelViewSet):
@@ -97,7 +97,7 @@ class MaterialViewSet(viewsets.ModelViewSet):
     """
     queryset = models.Material.objects.all()
     serializer_class = serializers.MaterialSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    permission_classes = [permissions.IsAuthenticated]
 
 
 class ReceiptViewSet(viewsets.ModelViewSet):
@@ -108,7 +108,7 @@ class ReceiptViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.ReceiptSerializer
     filter_backends = [SearchFilter, DjangoFilterBackend]
     search_fields = ['material']
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    permission_classes = [permissions.IsAuthenticated]
 
     def perform_create(self, serializer):
         """ Perform create """
@@ -123,7 +123,7 @@ class OrderViewSet(viewsets.ModelViewSet):
     serializer_class = serializers.OrderSerializer
     filter_backends = [SearchFilter, DjangoFilterBackend]
     search_fields = ['customer_name', 'note']
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    permission_classes = [permissions.IsAuthenticated]
 
     def perform_create(self, serializer):
         """ Perform create """
