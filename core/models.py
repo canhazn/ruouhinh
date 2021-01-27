@@ -74,7 +74,7 @@ class Order(models.Model):
         ordering = ["-date_created"]
 
     def __str__(self):
-        return str(self.customer_name)
+        return "Order: %s - %s" % (str(self.customer_name), str(self.employer.factory_name))
 
 
 class Material(models.Model):
@@ -96,4 +96,4 @@ class Receipt(models.Model):
         ordering = ["-date_created"]
 
     def __str__(self):
-        return "%s" % (self.employer)
+        return "Receipt: %s - %s" %(str(self.material.title), str(self.employer.factory_name))

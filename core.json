@@ -1,0 +1,64 @@
+[
+    {
+        "model": "core.user",
+        "pk": 1,
+        "fields": {
+            "last_login": "2021-01-22T14:06:23.401Z",
+            "is_superuser": true,
+            "email": "admin@gmail.com",
+            "password": "pbkdf2_sha256$180000$cCo7q5HknNBa$AcB4qnPkfil29JIDprLQ/ZBRi/yWZkuSabaYo3hCqWI=",
+            "factory_name": "Admin",
+            "is_active": true,
+            "is_staff": true,
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "core.user",
+        "pk": 2,
+        "fields": {
+            "last_login": null,
+            "is_superuser": false,
+            "email": "hinhmen@gmail.com",
+            "password": "pbkdf2_sha256$180000$ssgSUhMIsqSz$8qwn/n21w4aTTtKvUif/uzH+pzu61v5s0YjSYOJVnlk=",
+            "factory_name": "R\u01b0\u1ee3u Hinh",
+            "is_active": true,
+            "is_staff": false,
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "core.product",
+        "pk": 1,
+        "fields": {
+            "title": "R\u01b0\u1ee3u can 20 l\u00edt",
+            "price": 25000
+        }
+    },
+    {
+        "model": "core.product",
+        "pk": 2,
+        "fields": {
+            "title": "R\u01b0\u1ee3u can 10 l\u00edt",
+            "price": 25000
+        }
+    },
+    {
+        "model": "core.material",
+        "pk": 1,
+        "fields": {
+            "title": "G\u1ea1o",
+            "description": "G\u1ea1o say"
+        }
+    },
+    {
+        "model": "core.material",
+        "pk": 2,
+        "fields": {
+            "title": "Men",
+            "description": "Men b\u1eafc"
+        }
+    }
+]

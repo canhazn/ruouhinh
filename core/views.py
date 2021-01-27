@@ -1,7 +1,6 @@
-from core import models, serializers
+from core import models, serializers, permissions
 from django.contrib.auth import authenticate
 from rest_framework import viewsets
-from rest_framework import permissions
 
 from rest_framework.views import APIView
 from rest_framework.permissions import AllowAny
@@ -56,7 +55,7 @@ class UserViewSet(viewsets.ModelViewSet):
     """
     queryset = models.User.objects.all()
     serializer_class = serializers.UserSerializer
-    permission_classes = [permissions.IsAuthenticated]
+    # permission_classes = [permissions.IsAuthenticated]
 
 
 class BlacklistTokenUpdateView(APIView):
@@ -73,58 +72,135 @@ class BlacklistTokenUpdateView(APIView):
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
-class ProductViewSet(viewsets.ModelViewSet):
-    """
-    Product serializer
-    """
-    queryset = models.Product.objects.all()
-    serializer_class = serializers.ProductSerializer
-    permission_classes = [permissions.IsAuthenticated]
+# class ProductViewSet(viewsets.ModelViewSet):
+#     """
+#     Product serializer
+#     """
+#     queryset = models.Product.objects.all()
+#     serializer_class = serializers.ProductSerializer
+#     permission_classes = [permissions.IsAuthenticated]
 
 
-class IssueViewSet(viewsets.ModelViewSet):
-    """
-    Issue serializer
-    """
-    queryset = models.Issue.objects.all()
-    serializer_class = serializers.IssueSerializer
-    permission_classes = [permissions.IsAuthenticated]
+# class IssueViewSet(viewsets.ModelViewSet):
+#     """
+#     Issue serializer
+#     """
+#     queryset = models.Issue.objects.all()
+#     serializer_class = serializers.IssueSerializer
+#     permission_classes = [permissions.IsAuthenticated]
 
 
-class MaterialViewSet(viewsets.ModelViewSet):
-    """
-    Material serializer
-    """
-    queryset = models.Material.objects.all()
-    serializer_class = serializers.MaterialSerializer
-    permission_classes = [permissions.IsAuthenticated]
+# class MaterialViewSet(viewsets.ModelViewSet):
+#     """
+#     Material serializer
+#     """
+#     queryset = models.Material.objects.all()
+#     serializer_class = serializers.MaterialSerializer
+#     permission_classes = [permissions.IsAuthenticated]
 
 
-class ReceiptViewSet(viewsets.ModelViewSet):
+class ReceiptList(APIView):
     """
-    Receipt serializer
+    List all receipts, or create a new receipt.
     """
-    queryset = models.Receipt.objects.all()
-    serializer_class = serializers.ReceiptSerializer
-    filter_backends = [SearchFilter, DjangoFilterBackend]
-    search_fields = ['material']
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsOwnerOrReadOnly]
 
-    def perform_create(self, serializer):
-        """ Perform create """
-        serializer.save(employer=self.request.user)
+    def get(self, request, format=None):
+        receipts = models.Receipt.objects.filter(employer=request.user)
+        serializer = serializers.ReceiptSerializer(receipts, many=True)
+        return Response(serializer.data)
+
+    def post(self, request, format=None):
+        serializer = serializers.ReceiptSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save(employer = request.user)            
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class OrderViewSet(viewsets.ModelViewSet):
+class ReceiptDetail(APIView):
     """
-    Order serializer
+    Retrieve, update or delete a receipt instance.
     """
-    queryset = models.Order.objects.all()
-    serializer_class = serializers.OrderSerializer
-    filter_backends = [SearchFilter, DjangoFilterBackend]
-    search_fields = ['customer_name', 'note']
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [permissions.IsOwnerOrReadOnly]
 
-    def perform_create(self, serializer):
-        """ Perform create """
-        serializer.save(employer=self.request.user)
+    def get_object(self, pk):
+        try:
+            obj = models.Receipt.objects.get(pk=pk)
+            self.check_object_permissions(self.request, obj)
+
+            return models.Receipt.objects.get(pk=pk)
+        except models.Receipt.DoesNotExist:
+            raise Http404
+
+    def get(self, request, pk, format=None):
+        receipt = self.get_object(pk)
+        serializer = serializers.ReceiptSerializer(receipt)        
+        return Response(serializer.data)
+
+    def put(self, request, pk, format=None):
+        receipt = self.get_object(pk)
+        serializer = serializers.ReceiptSerializer(receipt, data=request.data)
+        if serializer.is_valid():          
+            serializer.save()              
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, pk, format=None):
+        receipt = self.get_object(pk)
+        receipt.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+class OrderList(APIView):
+    """
+    List all orders, or create a new order.
+    """
+    permission_classes = [permissions.IsOwnerOrReadOnly]
+
+    def get(self, request, format=None):
+        search = request.GET.get("search")
+        orders = models.Order.objects.filter(customer_name__contains=search, employer=request.user)
+        serializer = serializers.OrderSerializer(orders, many=True)
+        return Response(serializer.data)
+
+    def post(self, request, format=None):
+        serializer = serializers.OrderSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save(employer = request.user)            
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class OrderDetail(APIView):
+    """
+    Retrieve, update or delete a order instance.
+    """
+    permission_classes = [permissions.IsOwnerOrReadOnly]
+
+    def get_object(self, pk):
+        try:
+            obj = models.Order.objects.get(pk=pk)
+            self.check_object_permissions(self.request, obj)
+
+            return models.Order.objects.get(pk=pk)
+        except models.Order.DoesNotExist:
+            raise Http404
+
+    def get(self, request, pk, format=None):
+        order = self.get_object(pk)
+        serializer = serializers.OrderSerializer(order)
+        return Response(serializer.data)
+
+    def put(self, request, pk, format=None):
+        order = self.get_object(pk)
+        serializer = serializers.OrderSerializer(order, data=request.data)
+        if serializer.is_valid():                        
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, pk, format=None):
+        order = self.get_object(pk)
+        order.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
