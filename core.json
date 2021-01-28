@@ -15,21 +15,6 @@
         }
     },
     {
-        "model": "core.user",
-        "pk": 2,
-        "fields": {
-            "last_login": null,
-            "is_superuser": false,
-            "email": "hinhmen@gmail.com",
-            "password": "pbkdf2_sha256$180000$ssgSUhMIsqSz$8qwn/n21w4aTTtKvUif/uzH+pzu61v5s0YjSYOJVnlk=",
-            "factory_name": "R\u01b0\u1ee3u Hinh",
-            "is_active": true,
-            "is_staff": false,
-            "groups": [],
-            "user_permissions": []
-        }
-    },
-    {
         "model": "core.product",
         "pk": 1,
         "fields": {
