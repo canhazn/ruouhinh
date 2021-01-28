@@ -106,7 +106,13 @@ class ReceiptList(APIView):
     permission_classes = [permissions.IsOwnerOrReadOnly]
 
     def get(self, request, format=None):
-        receipts = models.Receipt.objects.filter(employer=request.user)
+        material = request.GET.get("material")        
+        
+        if material != "":
+            receipts = models.Receipt.objects.filter(employer=request.user, material=material)
+        else:
+            receipts = models.Receipt.objects.filter(employer=request.user)
+            
         serializer = serializers.ReceiptSerializer(receipts, many=True)
         return Response(serializer.data)
 
