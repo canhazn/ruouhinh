@@ -89,6 +89,8 @@ class Receipt(models.Model):
     employer = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
     material = models.ForeignKey(Material, on_delete=models.CASCADE)
     date_created = models.DateTimeField(auto_now_add=True)
+    note = models.CharField(max_length=200, null=True, blank=True, default="")
+    completed = models.BooleanField(default=True)
     quantity = models.IntegerField(null=False, blank=False)
     total_cost = models.FloatField(null=False, blank=False, default=0)
 
