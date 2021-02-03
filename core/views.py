@@ -116,7 +116,7 @@ class ReceiptList(APIView):
             material=2).aggregate(Sum('total_cost'))
 
         if material != "":
-            receipts = models.Receipt.objects.filter(material=material)
+            receipts = receipts.filter(material=material)
 
         serializer = serializers.ReceiptSerializer(receipts, many=True)
 
@@ -145,7 +145,7 @@ class ReceiptDetail(APIView):
             obj = models.Receipt.objects.get(pk=pk)
             self.check_object_permissions(self.request, obj)
 
-            return models.Receipt.objects.get(pk=pk)
+            return obj
         except models.Receipt.DoesNotExist:
             raise Http404
 
@@ -179,7 +179,7 @@ class OrderList(APIView):
         orders = models.Order.objects.filter(employer=request.user)
         total_amount = orders.aggregate(Sum('total_cost'))
 
-        orders = models.Order.objects.filter(customer_name__contains=search)
+        orders = orders.filter(customer_name__contains=search)
         serializer = serializers.OrderSerializer(orders, many=True)
         return Response({
             "result": serializer.data,
@@ -205,7 +205,7 @@ class OrderDetail(APIView):
             obj = models.Order.objects.get(pk=pk)
             self.check_object_permissions(self.request, obj)
 
-            return models.Order.objects.get(pk=pk)
+            return obj
         except models.Order.DoesNotExist:
             raise Http404
 

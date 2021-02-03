@@ -10,7 +10,7 @@ admin.site.register(models.Product, ProductAdmin)
 
 
 class OrderAdmin(admin.ModelAdmin):
-    list_display = ["customer_name"]
+    list_display = ["id", "customer_name" , "employer", "total_cost"]
 
 
 admin.site.register(models.Order, OrderAdmin)
