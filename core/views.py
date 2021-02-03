@@ -108,16 +108,15 @@ class ReceiptList(APIView):
 
     def get(self, request, format=None):
         material = request.GET.get("material")
-        receipts = models.Receipt.objects.all()
+        receipts = models.Receipt.objects.filter(employer=request.user)
 
-        total_amount_rice = receipts.filter(material=1).aggregate(Sum('total_cost'))
-        total_amount_yeast = receipts.filter(material=2).aggregate(Sum('total_cost'))
+        total_amount_rice = receipts.filter(
+            material=1).aggregate(Sum('total_cost'))
+        total_amount_yeast = receipts.filter(
+            material=2).aggregate(Sum('total_cost'))
 
         if material != "":
-            receipts = models.Receipt.objects.filter(
-                employer=request.user, material=material)
-        else:
-            receipts = models.Receipt.objects.filter(employer=request.user)
+            receipts = models.Receipt.objects.filter(material=material)
 
         serializer = serializers.ReceiptSerializer(receipts, many=True)
 
