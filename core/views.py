@@ -13,6 +13,7 @@ from django.conf import settings
 from rest_framework.filters import SearchFilter
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.decorators import api_view
+from django.db.models import Sum
 
 
 class UserLoginView(APIView):
@@ -106,20 +107,30 @@ class ReceiptList(APIView):
     permission_classes = [permissions.IsOwnerOrReadOnly]
 
     def get(self, request, format=None):
-        material = request.GET.get("material")        
-        
+        material = request.GET.get("material")
+
         if material != "":
-            receipts = models.Receipt.objects.filter(employer=request.user, material=material)
+            receipts = models.Receipt.objects.filter(
+                employer=request.user, material=material)
         else:
             receipts = models.Receipt.objects.filter(employer=request.user)
-            
+
         serializer = serializers.ReceiptSerializer(receipts, many=True)
-        return Response(serializer.data)
+        total_amount_rice = receipts.filter(
+            material=1).aggregate(Sum('total_cost'))
+        total_amount_yeast = receipts.filter(
+            material=2).aggregate(Sum('total_cost'))
+
+        return Response({
+            "result": serializer.data,
+            "total_amount_rice": total_amount_rice["total_cost__sum"],
+            "total_amount_yeast": total_amount_yeast["total_cost__sum"]
+        })
 
     def post(self, request, format=None):
         serializer = serializers.ReceiptSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save(employer = request.user)            
+            serializer.save(employer=request.user)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -141,14 +152,14 @@ class ReceiptDetail(APIView):
 
     def get(self, request, pk, format=None):
         receipt = self.get_object(pk)
-        serializer = serializers.ReceiptSerializer(receipt)        
+        serializer = serializers.ReceiptSerializer(receipt)
         return Response(serializer.data)
 
     def put(self, request, pk, format=None):
         receipt = self.get_object(pk)
         serializer = serializers.ReceiptSerializer(receipt, data=request.data)
-        if serializer.is_valid():          
-            serializer.save()              
+        if serializer.is_valid():
+            serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -166,14 +177,21 @@ class OrderList(APIView):
 
     def get(self, request, format=None):
         search = request.GET.get("search")
-        orders = models.Order.objects.filter(customer_name__contains=search, employer=request.user)
+        orders = models.Order.objects.filter(
+            customer_name__contains=search, employer=request.user)
         serializer = serializers.OrderSerializer(orders, many=True)
-        return Response(serializer.data)
+
+        total_amount = orders.aggregate(Sum('total_cost'))
+
+        return Response({
+            "result": serializer.data,
+            "total_amount": total_amount["total_cost__sum"]
+        })
 
     def post(self, request, format=None):
         serializer = serializers.OrderSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save(employer = request.user)            
+            serializer.save(employer=request.user)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -201,7 +219,7 @@ class OrderDetail(APIView):
     def put(self, request, pk, format=None):
         order = self.get_object(pk)
         serializer = serializers.OrderSerializer(order, data=request.data)
-        if serializer.is_valid():                        
+        if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
