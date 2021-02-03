@@ -3,13 +3,28 @@
         "model": "core.user",
         "pk": 1,
         "fields": {
-            "last_login": "2021-01-22T14:06:23.401Z",
+            "last_login": "2021-01-29T14:07:11.854Z",
             "is_superuser": true,
             "email": "admin@gmail.com",
             "password": "pbkdf2_sha256$180000$cCo7q5HknNBa$AcB4qnPkfil29JIDprLQ/ZBRi/yWZkuSabaYo3hCqWI=",
             "factory_name": "Admin",
             "is_active": true,
             "is_staff": true,
+            "groups": [],
+            "user_permissions": []
+        }
+    },
+    {
+        "model": "core.user",
+        "pk": 2,
+        "fields": {
+            "last_login": null,
+            "is_superuser": false,
+            "email": "hinhmen@gmail.com",
+            "password": "pbkdf2_sha256$180000$ssgSUhMIsqSz$8qwn/n21w4aTTtKvUif/uzH+pzu61v5s0YjSYOJVnlk=",
+            "factory_name": "R\u01b0\u1ee3u Hinh",
+            "is_active": true,
+            "is_staff": false,
             "groups": [],
             "user_permissions": []
         }
@@ -31,6 +46,34 @@
         }
     },
     {
+        "model": "core.order",
+        "pk": 6,
+        "fields": {
+            "employer": 1,
+            "product": 1,
+            "quantity": 3,
+            "customer_name": "3",
+            "note": "",
+            "date_created": "2021-01-28T11:10:14.593Z",
+            "total_cost": 1500000.0,
+            "completed": true
+        }
+    },
+    {
+        "model": "core.order",
+        "pk": 8,
+        "fields": {
+            "employer": 1,
+            "product": 1,
+            "quantity": 15,
+            "customer_name": "Nam",
+            "note": "",
+            "date_created": "2021-01-28T13:42:01.199Z",
+            "total_cost": 7500000.0,
+            "completed": true
+        }
+    },
+    {
         "model": "core.material",
         "pk": 1,
         "fields": {
@@ -44,6 +87,58 @@
         "fields": {
             "title": "Men",
             "description": "Men b\u1eafc"
+        }
+    },
+    {
+        "model": "core.receipt",
+        "pk": 7,
+        "fields": {
+            "employer": 1,
+            "material": 2,
+            "date_created": "2021-01-28T11:07:16.209Z",
+            "note": "",
+            "completed": true,
+            "quantity": 45,
+            "total_cost": 1125000.0
+        }
+    },
+    {
+        "model": "core.receipt",
+        "pk": 8,
+        "fields": {
+            "employer": 1,
+            "material": 1,
+            "date_created": "2021-01-28T11:11:32.511Z",
+            "note": "",
+            "completed": true,
+            "quantity": 6,
+            "total_cost": 456456.0
+        }
+    },
+    {
+        "model": "core.receipt",
+        "pk": 16,
+        "fields": {
+            "employer": 2,
+            "material": 1,
+            "date_created": "2021-01-31T14:59:24.560Z",
+            "note": "- 2 bao",
+            "completed": true,
+            "quantity": 37,
+            "total_cost": 19940000.0
+        }
+    },
+    {
+        "model": "core.receipt",
+        "pk": 18,
+        "fields": {
+            "employer": 2,
+            "material": 2,
+            "date_created": "2021-01-31T15:03:12.234Z",
+            "note": "",
+            "completed": true,
+            "quantity": 50,
+            "total_cost": 1420000.0
         }
     }
 ]
