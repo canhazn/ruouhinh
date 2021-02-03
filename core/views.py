@@ -108,6 +108,10 @@ class ReceiptList(APIView):
 
     def get(self, request, format=None):
         material = request.GET.get("material")
+        receipts = models.Receipt.objects.all()
+
+        total_amount_rice = receipts.filter(material=1).aggregate(Sum('total_cost'))
+        total_amount_yeast = receipts.filter(material=2).aggregate(Sum('total_cost'))
 
         if material != "":
             receipts = models.Receipt.objects.filter(
@@ -116,10 +120,6 @@ class ReceiptList(APIView):
             receipts = models.Receipt.objects.filter(employer=request.user)
 
         serializer = serializers.ReceiptSerializer(receipts, many=True)
-        total_amount_rice = receipts.filter(
-            material=1).aggregate(Sum('total_cost'))
-        total_amount_yeast = receipts.filter(
-            material=2).aggregate(Sum('total_cost'))
 
         return Response({
             "result": serializer.data,
@@ -177,12 +177,11 @@ class OrderList(APIView):
 
     def get(self, request, format=None):
         search = request.GET.get("search")
-        orders = models.Order.objects.filter(
-            customer_name__contains=search, employer=request.user)
-        serializer = serializers.OrderSerializer(orders, many=True)
-
+        orders = models.Order.objects.filter(employer=request.user)
         total_amount = orders.aggregate(Sum('total_cost'))
 
+        orders = models.Order.objects.filter(customer_name__contains=search)
+        serializer = serializers.OrderSerializer(orders, many=True)
         return Response({
             "result": serializer.data,
             "total_amount": total_amount["total_cost__sum"]
