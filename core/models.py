@@ -62,7 +62,7 @@ class Issue(models.Model):
 
 class Order(models.Model):
     employer = models.ForeignKey(User, on_delete=models.CASCADE,  default=1)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, null=True, blank=True)
     quantity = models.IntegerField(null=False, blank=False)
     customer_name = models.CharField(max_length=200, null=False, blank=False)
     note = models.CharField(max_length=200, null=True, blank=True, default="")

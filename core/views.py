@@ -176,14 +176,20 @@ class OrderList(APIView):
 
     def get(self, request, format=None):
         search = request.GET.get("search")
+        completed = request.GET.get("completed")
+
         orders = models.Order.objects.filter(employer=request.user)
         total_amount = orders.aggregate(Sum('total_cost'))
+        total_cash = orders.filter(completed=True).aggregate(Sum('total_cost'))
 
         orders = orders.filter(customer_name__contains=search)
+        if completed == "False":
+            orders = orders.filter(completed=False)
         serializer = serializers.OrderSerializer(orders, many=True)
         return Response({
             "result": serializer.data,
-            "total_amount": total_amount["total_cost__sum"]
+            "total_amount": total_amount["total_cost__sum"],
+            "total_cash": total_cash["total_cost__sum"]
         })
 
     def post(self, request, format=None):
