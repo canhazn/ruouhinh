@@ -3,7 +3,7 @@ from core import models
 
 
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ["title"]
+    list_display = ["id", "title", "price"]
 
 
 admin.site.register(models.Product, ProductAdmin)
@@ -17,7 +17,7 @@ admin.site.register(models.Order, OrderAdmin)
 
 
 class MaterialAdmin(admin.ModelAdmin):
-    list_display = ["title"]
+    list_display = ["id", "title"]
 
 
 admin.site.register(models.Material, MaterialAdmin)
@@ -35,3 +35,17 @@ class UserAdmin(admin.ModelAdmin):
 
 
 admin.site.register(models.User, UserAdmin)
+
+
+class NotificationAdmin(admin.ModelAdmin):
+    raw_id_fields = ('recipient',)
+    list_display = ('recipient', 'actor',
+                    'target', 'verb')
+    list_filter = ('level', 'unread', 'public', 'timestamp',)
+
+    def get_queryset(self, request):
+        qs = super(NotificationAdmin, self).get_queryset(request)
+        return qs.prefetch_related('actor')
+
+
+admin.site.register(models.Notification, NotificationAdmin)

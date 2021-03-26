@@ -14,50 +14,25 @@ from rest_framework.filters import SearchFilter
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.decorators import api_view
 from django.db.models import Sum
+import json
+from django.core.serializers import serialize as dj_serialize
 
+from rest_framework.decorators import api_view
+from notifications.signals import notify
 
-class UserLoginView(APIView):
-    def post(self, request):
-        serializer = serializers.LoginSerializer(data=request.data)
-        if serializer.is_valid():
-            print(serializer.validated_data)
-            user = authenticate(
-                request,
-                email=request.data["email"],
-                password=request.data["password"]
-            )
+ADMIN_EMAIL = "admin@gmail.com"
 
-            if user:
-                refresh = TokenObtainPairSerializer.get_token(user)
-                data = {
-                    'refresh': str(refresh),
-                    'access': str(refresh.access_token),
-                    'access_expires': int(settings.SIMPLE_JWT['ACCESS_TOKEN_LIFETIME'].total_seconds()),
-                    'refresh_expires': int(settings.SIMPLE_JWT['REFRESH_TOKEN_LIFETIME'].total_seconds()),
-                    "user": {
-                        "email": user.get_username(),
-                        "factory_name": user.__getattribute__("factory_name")
-                    }
-                }
-                return Response(data, status=status.HTTP_200_OK)
-            return Response({
-                'error_message': 'Email or password is incorrect!',
-                'error_code': 400
-            }, status=status.HTTP_400_BAD_REQUEST)
-        return Response({
-            'error_messages': serializer.errors,
-            'error_code': 400
-        }, status=status.HTTP_400_BAD_REQUEST)
+ORDER_VERB = {
+    "create": "Create Order",
+    "update": "Update Order",
+    "delete": "Delete Order",
+}
 
-
-class UserViewSet(viewsets.ModelViewSet):
-    """
-    This viewset automatically provides `list` and `retrieve` actions.
-    """
-    queryset = models.User.objects.all()
-    serializer_class = serializers.UserSerializer
-    # permission_classes = [permissions.IsAuthenticated]
-
+RECEIPT_VERB = {
+    "create": "Create Receipt",
+    "update": "Update Receipt",
+    "delete": "Delete Receipt",
+}
 
 class BlacklistTokenUpdateView(APIView):
     permission_classes = [AllowAny]
@@ -72,34 +47,6 @@ class BlacklistTokenUpdateView(APIView):
         except Exception:
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
-
-# class ProductViewSet(viewsets.ModelViewSet):
-#     """
-#     Product serializer
-#     """
-#     queryset = models.Product.objects.all()
-#     serializer_class = serializers.ProductSerializer
-#     permission_classes = [permissions.IsAuthenticated]
-
-
-# class IssueViewSet(viewsets.ModelViewSet):
-#     """
-#     Issue serializer
-#     """
-#     queryset = models.Issue.objects.all()
-#     serializer_class = serializers.IssueSerializer
-#     permission_classes = [permissions.IsAuthenticated]
-
-
-# class MaterialViewSet(viewsets.ModelViewSet):
-#     """
-#     Material serializer
-#     """
-#     queryset = models.Material.objects.all()
-#     serializer_class = serializers.MaterialSerializer
-#     permission_classes = [permissions.IsAuthenticated]
-
-
 class ReceiptList(APIView):
     """
     List all receipts, or create a new receipt.
@@ -109,12 +56,22 @@ class ReceiptList(APIView):
     def get(self, request, format=None):
         material = request.GET.get("material")
         receipts = models.Receipt.objects.filter(employer=request.user)
+        get_total_info = request.GET.get("get-total-info")
 
         total_amount_rice = receipts.filter(
             material=1).aggregate(Sum('total_cost'))
         total_amount_yeast = receipts.filter(
             material=2).aggregate(Sum('total_cost'))
 
+        
+        # Just get caculated info
+        if get_total_info == "all":
+            return Response({              
+                "total_amount_rice": total_amount_rice["total_cost__sum"],
+                "total_amount_yeast": total_amount_yeast["total_cost__sum"]
+            })
+
+        # Filters
         if material != "":
             receipts = receipts.filter(material=material)
 
@@ -129,7 +86,11 @@ class ReceiptList(APIView):
     def post(self, request, format=None):
         serializer = serializers.ReceiptSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save(employer=request.user)
+            receipt = serializer.save(employer=request.user)
+
+            admin = models.User.objects.get(email=ADMIN_EMAIL)
+            notify.send(sender=request.user, recipient=admin,
+                        verb=RECEIPT_VERB["create"], target=receipt, description=serializer.data)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -156,14 +117,30 @@ class ReceiptDetail(APIView):
 
     def put(self, request, pk, format=None):
         receipt = self.get_object(pk)
+        # get old value and send notify
+        oldvalue = serializers.ReceiptSerializer(receipt).data
+
         serializer = serializers.ReceiptSerializer(receipt, data=request.data)
         if serializer.is_valid():
             serializer.save()
+            # send notify to admin
+            admin = models.User.objects.get(email=ADMIN_EMAIL)
+            notify.send(sender=request.user, recipient=admin,
+                        verb=RECEIPT_VERB["update"], target=receipt, description={
+                            "old": oldvalue,
+                            "new": serializer.data
+                        })
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, pk, format=None):
         receipt = self.get_object(pk)
+
+        admin = models.User.objects.get(email=ADMIN_EMAIL)
+        notify.send(sender=request.user, recipient=admin,
+                    verb=RECEIPT_VERB["delete"], target=receipt, description=serializers.ReceiptSerializer(receipt).data)
+
+
         receipt.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
@@ -177,14 +154,25 @@ class OrderList(APIView):
     def get(self, request, format=None):
         search = request.GET.get("search")
         completed = request.GET.get("completed")
+        get_total_info = request.GET.get("get-total-info")
 
         orders = models.Order.objects.filter(employer=request.user)
         total_amount = orders.aggregate(Sum('total_cost'))
         total_cash = orders.filter(completed=True).aggregate(Sum('total_cost'))
 
+
+        # Just get caculated info
+        if get_total_info == "all":
+            return Response({              
+                "total_amount": total_amount["total_cost__sum"],
+                "total_cash": total_cash["total_cost__sum"]
+            })
+
+        # Filters
         orders = orders.filter(customer_name__contains=search)
         if completed == "False":
             orders = orders.filter(completed=False)
+
         serializer = serializers.OrderSerializer(orders, many=True)
         return Response({
             "result": serializer.data,
@@ -195,7 +183,11 @@ class OrderList(APIView):
     def post(self, request, format=None):
         serializer = serializers.OrderSerializer(data=request.data)
         if serializer.is_valid():
-            serializer.save(employer=request.user)
+            order = serializer.save(employer=request.user)
+
+            admin = models.User.objects.get(email=ADMIN_EMAIL)
+            notify.send(sender=request.user, recipient=admin,
+                        verb=ORDER_VERB["create"], target=order, description=serializer.data)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
@@ -222,13 +214,50 @@ class OrderDetail(APIView):
 
     def put(self, request, pk, format=None):
         order = self.get_object(pk)
+        oldvalue = serializers.OrderSerializer(order).data
+
         serializer = serializers.OrderSerializer(order, data=request.data)
         if serializer.is_valid():
             serializer.save()
+            admin = models.User.objects.get(email=ADMIN_EMAIL)
+            notify.send(sender=request.user, recipient=admin,
+                        verb=ORDER_VERB["update"], target=order, description={
+                            "old": oldvalue,
+                            "new": serializer.data
+                        })
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def delete(self, request, pk, format=None):
         order = self.get_object(pk)
+
+        admin = models.User.objects.get(email=ADMIN_EMAIL)
+        notify.send(sender=request.user, recipient=admin,
+                    verb=ORDER_VERB["delete"], target=order, description=serializers.OrderSerializer(order).data)
+
         order.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+@api_view()
+def get_notify(request):
+
+    user = request.user
+    if user.email == "admin@gmail.com":
+        queryset = models.Notification.objects.filter(recipient=user)    
+    else:
+        queryset = models.Notification.objects.filter(actor_object_id=user.id)
+    notify = serializers.NotificationSerializer(queryset, many=True)
+
+    return Response({"result": notify.data})
+
+
+@api_view()
+def get_factory_name(request):
+
+    user = request.user
+    queryset = models.User.objects.get(email=user)    
+
+    return Response({"factory_name": user.factory_name})
+
+

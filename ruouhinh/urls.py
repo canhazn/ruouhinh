@@ -36,16 +36,8 @@ urlpatterns = [
                              content_type="text/xml"),
     ),
     path('admin/', admin.site.urls),
-    path('summernote/', include('django_summernote.urls')),
     path('', include('browser.urls')),    
     path('api/', include('core.urls')),
-    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-    path('docs/', include_docs_urls(title='RuouhinhApi')),
-    path('schema/', get_schema_view(
-        title="RuouhinhApi",
-        description="API for the RuouhinhApi",
-        version="1.0.0"
-    ), name='openapi-schema'),
 ]
 
 if settings.DEBUG:

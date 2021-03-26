@@ -1,3 +1,4 @@
+from notifications.base.models import AbstractNotification
 from core import models
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
@@ -37,9 +38,9 @@ class ProductSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-class IssueSerializer(serializers.ModelSerializer):
+class InventorySerializer(serializers.ModelSerializer):
     class Meta:
-        model = models.Issue
+        model = models.Inventory
         fields = "__all__"
 
 
@@ -60,3 +61,33 @@ class ReceiptSerializer(serializers.ModelSerializer):
         model = models.Receipt
         fields = "__all__"
 
+
+class GenericNotificationRelatedField(serializers.RelatedField):
+
+    def to_representation(self, value):
+        if isinstance(value, models.Order):
+            serializer = OrderSerializer(value)
+        if isinstance(value, models.Receipt):
+            serializer = ReceiptSerializer(value)
+
+        return serializer.data
+
+class GenericNotificationRelatedField(serializers.RelatedField):
+
+    def to_representation(self, value):
+        if isinstance(value, models.Order):
+            serializer = OrderSerializer(value)
+        if isinstance(value, models.Receipt):
+            serializer = ReceiptSerializer(value)
+
+        return serializer.data
+
+
+class NotificationSerializer(serializers.Serializer):
+    recipient = UserSerializer(models.User, read_only=True)
+    actor = UserSerializer(models.User, read_only=True)
+    unread = serializers.BooleanField(read_only=True)
+    verb = serializers.CharField(read_only=True)
+    description = serializers.CharField(read_only=True)
+    target = GenericNotificationRelatedField(read_only=True)
+    timestamp = serializers.DateTimeField(read_only=True)

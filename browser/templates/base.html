@@ -83,7 +83,7 @@
                             <div class="single-footer-caption mb-30">
                                 <div class="footer-logo">
                                     <a class="h3" href="{% url 'trang-chu' %}">
-                                    <img src="/browser/static/img/logo/logo.png" alt="logo Rượu Hinh">
+                                        <img src="/browser/static/img/logo/logo.png" alt="logo Rượu Hinh">
                                     </a>
                                 </div>
                                 <div class="footer-tittle">
@@ -178,6 +178,19 @@
         gtag('js', new Date());
 
         gtag('config', 'G-NZQ2KN677F');
+    </script>
+
+    <script>
+        $("form").on("submit", (event) => {
+            event.preventDefault();
+            let data = $("form").serialize();
+            console.log(data);
+
+            // $.ajax({
+            //     url: "/api/order/create",
+            //     method: "POST",
+            // })
+        })
     </script>
 
 </body>

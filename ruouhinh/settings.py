@@ -47,7 +47,7 @@ INSTALLED_APPS = [
 
     'browser',
     'core',
-    'django_summernote',
+    # 'django_summernote',
 ]
 
 MIDDLEWARE = [
@@ -88,18 +88,18 @@ WSGI_APPLICATION = 'ruouhinh.wsgi.application'
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    # },
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'dbhv2ofr2t7vf2',
-        'USER': 'bnfjjdhgopjlwf',
-        'PASSWORD': '15e0c600f9453047652acfd278946985da90acb8acde2111874506b9b3db5544',
-        'HOST': 'ec2-34-192-173-173.compute-1.amazonaws.com',
-        'PORT': '5432'
-    }
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    },
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.postgresql',
+    #     'NAME': 'dbhv2ofr2t7vf2',
+    #     'USER': 'bnfjjdhgopjlwf',
+    #     'PASSWORD': '15e0c600f9453047652acfd278946985da90acb8acde2111874506b9b3db5544',
+    #     'HOST': 'ec2-34-192-173-173.compute-1.amazonaws.com',
+    #     'PORT': '5432'
+    # }
 }
 
 
@@ -193,3 +193,5 @@ SIMPLE_JWT = {
 }
 
 AUTH_USER_MODEL = 'core.User'
+NOTIFICATIONS_NOTIFICATION_MODEL = 'core.Notification'
+
