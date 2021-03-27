@@ -22,6 +22,12 @@ urls = format_suffix_patterns([
     path('order/', views.OrderList.as_view()),
     path('order/<int:pk>/', views.OrderDetail.as_view()),
 
+    path('product/', views.ProductList.as_view()),
+
+    path('cargo/', views.CargoList.as_view()),
+    path('cargo/<int:pk>/', views.CargoDetail.as_view()),
+
+
     path('notify/', views.get_notify),
     path('get_factory_name/', views.get_factory_name)
 ])

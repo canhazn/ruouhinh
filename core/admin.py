@@ -5,8 +5,13 @@ from core import models
 class ProductAdmin(admin.ModelAdmin):
     list_display = ["id", "title", "price"]
 
-
 admin.site.register(models.Product, ProductAdmin)
+
+
+class CargoAdmin(admin.ModelAdmin):
+    list_display = ["id", "employer", "product", "quantity"]
+
+admin.site.register(models.Cargo, CargoAdmin)
 
 
 class OrderAdmin(admin.ModelAdmin):

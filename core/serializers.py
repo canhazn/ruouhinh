@@ -38,9 +38,9 @@ class ProductSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
-class InventorySerializer(serializers.ModelSerializer):
+class CargoSerializer(serializers.ModelSerializer):
     class Meta:
-        model = models.Inventory
+        model = models.Cargo
         fields = "__all__"
 
 

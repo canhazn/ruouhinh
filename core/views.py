@@ -47,6 +47,7 @@ class BlacklistTokenUpdateView(APIView):
         except Exception:
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
+
 class ReceiptList(APIView):
     """
     List all receipts, or create a new receipt.
@@ -93,7 +94,6 @@ class ReceiptList(APIView):
                         verb=RECEIPT_VERB["create"], target=receipt, description=serializer.data)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
 
 class ReceiptDetail(APIView):
     """
@@ -191,7 +191,6 @@ class OrderList(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
 class OrderDetail(APIView):
     """
     Retrieve, update or delete a order instance.
@@ -237,6 +236,148 @@ class OrderDetail(APIView):
 
         order.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+
+class CargoList(APIView):
+    """
+    List all cargos, or create a new cargo.
+    """
+    permission_classes = [permissions.IsOwnerOrReadOnly]
+
+    def get(self, request, format=None):
+        # search = request.GET.get("search")
+        # completed = request.GET.get("completed")
+        get_total_of = request.GET.get("get-total-of")
+
+        cargos = models.Cargo.objects.filter(employer=request.user)
+        # total_cash = cargos.filter(completed=True).aggregate(Sum('total_cost'))
+
+
+        # Just get caculated info
+        if get_total_of:
+            total_amount = cargos.filter(product=get_total_of).aggregate(Sum('quantity'))
+            return Response({              
+                "total_amount": total_amount["quantity__sum"],                
+            })
+
+        # Filters
+        # cargos = cargos.filter(customer_name__contains=search)
+        # if completed == "False":
+        #     cargos = cargos.filter(completed=False)
+
+        serializer = serializers.CargoSerializer(cargos, many=True)
+        return Response({
+            "result": serializer.data,
+            # "total_amount": total_amount["total_cost__sum"],
+            # "total_cash": total_cash["total_cost__sum"]
+        })
+
+    def post(self, request, format=None):
+        serializer = serializers.CargoSerializer(data=request.data)
+        if serializer.is_valid():
+            cargo = serializer.save(employer=request.user)
+
+            admin = models.User.objects.get(email=ADMIN_EMAIL)
+            notify.send(sender=request.user, recipient=admin,
+                        verb=ORDER_VERB["create"], target=cargo, description=serializer.data)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class CargoDetail(APIView):
+    """
+    Retrieve, update or delete a cargo instance.
+    """
+    permission_classes = [permissions.IsOwnerOrReadOnly]
+
+    def get_object(self, pk):
+        try:
+            obj = models.Cargo.objects.get(pk=pk)
+            self.check_object_permissions(self.request, obj)
+
+            return obj
+        except models.Cargo.DoesNotExist:
+            raise Http404
+
+    def get(self, request, pk, format=None):
+        cargo = self.get_object(pk)
+        serializer = serializers.CargoSerializer(cargo)
+        return Response(serializer.data)
+
+    def put(self, request, pk, format=None):
+        cargo = self.get_object(pk)
+        oldvalue = serializers.CargoSerializer(cargo).data
+
+        serializer = serializers.CargoSerializer(cargo, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            admin = models.User.objects.get(email=ADMIN_EMAIL)
+            notify.send(sender=request.user, recipient=admin,
+                        verb=ORDER_VERB["update"], target=cargo, description={
+                            "old": oldvalue,
+                            "new": serializer.data
+                        })
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, pk, format=None):
+        cargo = self.get_object(pk)
+
+        admin = models.User.objects.get(email=ADMIN_EMAIL)
+        notify.send(sender=request.user, recipient=admin,
+                    verb=ORDER_VERB["delete"], target=cargo, description=serializers.CargoSerializer(cargo).data)
+
+        cargo.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
+
+
+class ProductList(APIView):
+    """
+    List all products, or create a new product.
+    """
+    permission_classes = [permissions.IsOwnerOrReadOnly]
+
+    def get(self, request, format=None):
+        # search = request.GET.get("search")
+        # completed = request.GET.get("completed")
+        # get_total_info = request.GET.get("get-total-info")
+
+        products = models.Product.objects.all()
+        # total_amount = products.aggregate(Sum('total_cost'))
+        # total_cash = products.filter(completed=True).aggregate(Sum('total_cost'))
+
+
+        # Just get caculated info
+        # if get_total_info == "all":
+        #     return Response({              
+        #         "total_amount": total_amount["total_cost__sum"],
+        #         "total_cash": total_cash["total_cost__sum"]
+        #     })
+
+        # Filters
+        # products = products.filter(customer_name__contains=search)
+        # if completed == "False":
+        #     products = products.filter(completed=False)
+
+        serializer = serializers.ProductSerializer(products, many=True)
+        return Response({
+            "result": serializer.data,
+            # "total_amount": total_amount["total_cost__sum"],
+            # "total_cash": total_cash["total_cost__sum"]
+        })
+
+    def post(self, request, format=None):
+        serializer = serializers.ProductSerializer(data=request.data)
+        if serializer.is_valid():
+            product = serializer.save(employer=request.user)
+
+            admin = models.User.objects.get(email=ADMIN_EMAIL)
+            notify.send(sender=request.user, recipient=admin,
+                        verb=ORDER_VERB["create"], target=product, description=serializer.data)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 
 
 @api_view()
