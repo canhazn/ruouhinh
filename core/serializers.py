@@ -69,6 +69,8 @@ class GenericNotificationRelatedField(serializers.RelatedField):
             serializer = OrderSerializer(value)
         if isinstance(value, models.Receipt):
             serializer = ReceiptSerializer(value)
+        if isinstance(value, models.Cargo):
+            serializer = CargoSerializer(value)
 
         return serializer.data
 
@@ -79,6 +81,8 @@ class GenericNotificationRelatedField(serializers.RelatedField):
             serializer = OrderSerializer(value)
         if isinstance(value, models.Receipt):
             serializer = ReceiptSerializer(value)
+        if isinstance(value, models.Cargo):
+            serializer = CargoSerializer(value)
 
         return serializer.data
 

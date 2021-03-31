@@ -20,7 +20,7 @@ from django.core.serializers import serialize as dj_serialize
 from rest_framework.decorators import api_view
 from notifications.signals import notify
 
-ADMIN_EMAIL = "admin@gmail.com"
+ADMIN_EMAIL = "canhazn@gmail.com"
 
 ORDER_VERB = {
     "create": "Create Order",
@@ -378,6 +378,52 @@ class ProductList(APIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+
+class MaterialList(APIView):
+    """
+    List all materials, or create a new material.
+    """
+    permission_classes = [permissions.IsOwnerOrReadOnly]
+
+    def get(self, request, format=None):
+        # search = request.GET.get("search")
+        # completed = request.GET.get("completed")
+        # get_total_info = request.GET.get("get-total-info")
+
+        materials = models.Material.objects.all()
+        # total_amount = materials.aggregate(Sum('total_cost'))
+        # total_cash = materials.filter(completed=True).aggregate(Sum('total_cost'))
+
+
+        # Just get caculated info
+        # if get_total_info == "all":
+        #     return Response({              
+        #         "total_amount": total_amount["total_cost__sum"],
+        #         "total_cash": total_cash["total_cost__sum"]
+        #     })
+
+        # Filters
+        # materials = materials.filter(customer_name__contains=search)
+        # if completed == "False":
+        #     materials = materials.filter(completed=False)
+
+        serializer = serializers.MaterialSerializer(materials, many=True)
+        return Response({
+            "result": serializer.data,
+            # "total_amount": total_amount["total_cost__sum"],
+            # "total_cash": total_cash["total_cost__sum"]
+        })
+
+    def post(self, request, format=None):
+        serializer = serializers.MaterialSerializer(data=request.data)
+        if serializer.is_valid():
+            material = serializer.save(employer=request.user)
+
+            admin = models.User.objects.get(email=ADMIN_EMAIL)
+            notify.send(sender=request.user, recipient=admin,
+                        verb=ORDER_VERB["create"], target=material, description=serializer.data)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
 @api_view()
