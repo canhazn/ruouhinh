@@ -173,7 +173,7 @@ class OrderList(APIView):
         if completed == "False":
             orders = orders.filter(completed=False)
 
-        serializer = serializers.OrderSerializer(orders, many=True)
+        serializer = serializers.OrderDetailSerializer(orders, many=True)
         return Response({
             "result": serializer.data,
             "total_amount": total_amount["total_cost__sum"],
@@ -237,6 +237,16 @@ class OrderDetail(APIView):
         order.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
+def check_cargo_emty(cargo_id):
+    # Caculate sum of order of cargo
+    # Return True if cargo.quntity >= sum
+    cargo = models.Cargo.objects.get(id=cargo_id)
+    orders = models.Order.objects.filter(cargo=cargo_id)
+    quantity_sum = orders.aggregate(Sum('quantity')).get("quantity__sum")
+    if quantity_sum is None:
+        return False
+    else:
+        return cargo.quantity >= quantity_sum
 
 
 class CargoList(APIView):
@@ -249,7 +259,7 @@ class CargoList(APIView):
         # search = request.GET.get("search")
         # completed = request.GET.get("completed")
         get_total_of = request.GET.get("get-total-of")
-
+        get_list_of = request.GET.get("get-list-of")
         cargos = models.Cargo.objects.filter(employer=request.user)
         # total_cash = cargos.filter(completed=True).aggregate(Sum('total_cost'))
 
@@ -261,11 +271,29 @@ class CargoList(APIView):
                 "total_amount": total_amount["quantity__sum"],                
             })
 
+        # Just get caculated info
+        if get_list_of:
+            cargos = cargos.filter(product=get_list_of)
+            # list_cargo = []
+            # for cargo in cargos:                
+            #     print(cargos)
+            #     if check_cargo_emty(cargo.id) == False:
+            #         list_cargo.append(cargo)
+            serializer = serializers.CargoSerializer(cargos, many=True)
+                    
+            return Response({
+                "result": serializer.data,
+                # "total_amount": total_amount["total_cost__sum"],
+                # "total_cash": total_cash["total_cost__sum"]
+            })
+
         # Filters
         # cargos = cargos.filter(customer_name__contains=search)
         # if completed == "False":
         #     cargos = cargos.filter(completed=False)
 
+        # print(cargos)
+            
         serializer = serializers.CargoSerializer(cargos, many=True)
         return Response({
             "result": serializer.data,
@@ -329,8 +357,6 @@ class CargoDetail(APIView):
 
         cargo.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
-
-
 
 class ProductList(APIView):
     """

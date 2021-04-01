@@ -1,4 +1,5 @@
 from notifications.base.models import AbstractNotification
+from django.db.models import Sum
 from core import models
 from rest_framework import serializers
 from django.contrib.auth import get_user_model
@@ -39,16 +40,43 @@ class ProductSerializer(serializers.ModelSerializer):
 
 
 class CargoSerializer(serializers.ModelSerializer):
+
+    real_quantity = serializers.SerializerMethodField()
+    # product_name = serializers.SerializerMethodField()
+
     class Meta:
         model = models.Cargo
         fields = "__all__"
+
+    # def get_product_name(self, obj):
+        
+
+    def get_real_quantity(self, obj):        
+        orders = models.Order.objects.filter(cargo=obj.id)
+        quantity_sum = orders.aggregate(Sum('quantity')).get("quantity__sum")
+        if quantity_sum is None:
+            return obj.quantity
+        else:
+            return obj.quantity - quantity_sum
+
+
+class OrderDetailSerializer(serializers.ModelSerializer):
+    # cargo = CargoSerializer(many=True)
+
+    class Meta:
+        model = models.Order
+        fields = ["id", "note", "customer_name", "quantity", "total_cost", "date_created", "date_created", "completed", "cargo"]
+        depth = 1
+
+    # def get_cargo(self, obj):
+        # return models.Cargo.objects.filter()
+
 
 
 class OrderSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Order
         fields = "__all__"
-
 
 class MaterialSerializer(serializers.ModelSerializer):
     class Meta:
@@ -73,6 +101,7 @@ class GenericNotificationRelatedField(serializers.RelatedField):
             serializer = CargoSerializer(value)
 
         return serializer.data
+
 
 class GenericNotificationRelatedField(serializers.RelatedField):
 
